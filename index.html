@@ -1140,7 +1140,7 @@ Gere um relatório com exatamente as seguintes seções em HTML. Use <strong> pa
 Responda APENAS com o HTML das 4 divs acima. Nada mais.`;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://crescer360-proxy.chequerpaulo.workers.dev/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
