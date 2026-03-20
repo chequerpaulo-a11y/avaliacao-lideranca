@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Avaliação de Liderança | Crescer 360°</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Lora:ital@0;1&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -819,6 +819,14 @@
         </select>
       </div>
       <div class="field">
+        <label>E-mail</label>
+        <input type="email" id="email_cliente" placeholder="seu@email.com" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>Telefone / WhatsApp</label>
+        <input type="tel" id="telefone" placeholder="(00) 00000-0000" autocomplete="off">
+      </div>
+      <div class="field">
         <label>Há quantos anos você está em posição de liderança?</label>
         <select id="experiencia">
           <option value="">Selecione</option>
@@ -996,7 +1004,9 @@ function irParaQuestoes() {
     return;
   }
 
-  dadosLider = { nome, empresa, cargo, equipe, experiencia };
+  const email_cliente = document.getElementById('email_cliente').value.trim();
+  const telefone = document.getElementById('telefone').value.trim();
+  dadosLider = { nome, empresa, cargo, equipe, experiencia, email_cliente, telefone };
   renderQuestoes();
   trocarTela('screen-questoes');
   document.getElementById('progress-wrap').style.display = 'flex';
@@ -1266,30 +1276,41 @@ function extrairSecao(html, id) {
 
 async function enviarEmail(relatorio, scores, pillars) {
   try {
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    const relatorioTexto = relatorio.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().substring(0, 2000);
+    const emailBody = 'CRESCER 360 - AVALIACAO DE LIDERANCA\n\n'
+      + 'Nome: ' + dadosLider.nome + '\n'
+      + 'Email: ' + (dadosLider.email_cliente || '-') + '\n'
+      + 'Telefone: ' + (dadosLider.telefone || '-') + '\n'
+      + 'Empresa: ' + dadosLider.empresa + '\n'
+      + 'Cargo: ' + dadosLider.cargo + '\n'
+      + 'Equipe: ' + dadosLider.equipe + '\n'
+      + 'Experiencia: ' + dadosLider.experiencia + '\n\n'
+      + 'PILARES: E=' + pillars.estrategia + ' C=' + pillars.cultura + ' L=' + pillars.lideranca + ' P=' + pillars.performance + '\n'
+      + 'ESTILOS: ' + Object.entries(scores).sort((a,b)=>b[1]-a[1]).map(([k,v]) => k+':'+v).join(' | ') + '\n\n'
+      + 'RELATORIO:\n' + relatorioTexto;
 
-    const respostasTexto = perguntas.map(p => {
-      const r = respostas[p.id];
-      return `${p.id}. [${p.pillar}] ${p.texto}\n→ ${r.texto}`;
-    }).join('\n\n');
-
-    const relatorioTexto = relatorio.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().substring(0, 2500);
-    const emailBody = 'CRESCER 360° - AVALIAÇÃO DE LIDERANÇA\n\n'
-      + 'Nome: ' + dadosLider.nome + '\nEmpresa: ' + dadosLider.empresa + '\nCargo: ' + dadosLider.cargo + '\nEquipe: ' + dadosLider.equipe + '\nExperiência: ' + dadosLider.experiencia
-      + '\n\nPILARES: Estratégia=' + pillars.estrategia + ' | Cultura=' + pillars.cultura + ' | Liderança=' + pillars.lideranca + ' | Performance=' + pillars.performance
-      + '\n\nESTILOS: ' + Object.entries(scores).sort((a,b)=>b[1]-a[1]).map(([k,v]) => k+':'+v).join(' | ')
-      + '\n\nRELATÓRIO:\n' + relatorioTexto;
-
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      to_email: PAULO_EMAIL,
-      name: dadosLider.nome + ' | ' + dadosLider.empresa,
-      from_name: 'Crescer 360° - Avaliação de Liderança',
-      reply_to: PAULO_EMAIL,
-      subject: 'Avaliação de Liderança — ' + dadosLider.nome + ' | ' + dadosLider.empresa,
-      message: emailBody
+    const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service_id: EMAILJS_SERVICE_ID,
+        template_id: EMAILJS_TEMPLATE_ID,
+        user_id: EMAILJS_PUBLIC_KEY,
+        template_params: {
+          name: dadosLider.nome,
+          message: emailBody,
+          subject: 'Avaliacao de Lideranca - ' + dadosLider.nome + ' | ' + dadosLider.empresa
+        }
+      })
     });
 
-    document.getElementById('email-success').classList.add('show');
+    if (res.status === 200) {
+      document.getElementById('email-success').classList.add('show');
+    } else {
+      const errText = await res.text();
+      console.error('EmailJS status:', res.status, errText);
+      document.getElementById('email-error').classList.add('show');
+    }
   } catch(err) {
     console.error('EmailJS error:', err);
     document.getElementById('email-error').classList.add('show');
