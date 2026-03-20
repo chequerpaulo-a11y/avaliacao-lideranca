@@ -853,7 +853,7 @@
 
 <script>
 const EMAILJS_SERVICE_ID = 'service_crescer360';
-const EMAILJS_TEMPLATE_ID = 'template_avaliacao';
+const EMAILJS_TEMPLATE_ID = 'template_64lgzr7';
 const EMAILJS_PUBLIC_KEY = 'a9-Dxx_YUDCftzJ41';
 const PAULO_EMAIL = 'chequerpaulo@gmail.com';
 
@@ -1273,35 +1273,16 @@ async function enviarEmail(relatorio, scores, pillars) {
       return `${p.id}. [${p.pillar}] ${p.texto}\n→ ${r.texto}`;
     }).join('\n\n');
 
-    const emailBody = `
-NOVA AVALIAÇÃO DE LIDERANÇA — CRESCER 360°
-==========================================
-
-DADOS DO LÍDER:
-Nome: ${dadosLider.nome}
-Empresa: ${dadosLider.empresa}
-Cargo: ${dadosLider.cargo}
-Equipe: ${dadosLider.equipe}
-Experiência: ${dadosLider.experiencia}
-
-ESCORE POR PILAR:
-Estratégia: ${pillars.estrategia}
-Cultura: ${pillars.cultura}
-Liderança: ${pillars.lideranca}
-Performance: ${pillars.performance}
-
-ESTILO DOMINANTE:
-${Object.entries(scores).sort((a,b)=>b[1]-a[1]).map(([k,v]) => `${k}: ${v} respostas`).join('\n')}
-
-RESPOSTAS:
-${respostasTexto}
-
-RELATÓRIO GERADO PELA IA:
-${relatorio.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
-    `;
+    const relatorioTexto = relatorio.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().substring(0, 2500);
+    const emailBody = 'CRESCER 360° - AVALIAÇÃO DE LIDERANÇA\n\n'
+      + 'Nome: ' + dadosLider.nome + '\nEmpresa: ' + dadosLider.empresa + '\nCargo: ' + dadosLider.cargo + '\nEquipe: ' + dadosLider.equipe + '\nExperiência: ' + dadosLider.experiencia
+      + '\n\nPILARES: Estratégia=' + pillars.estrategia + ' | Cultura=' + pillars.cultura + ' | Liderança=' + pillars.lideranca + ' | Performance=' + pillars.performance
+      + '\n\nESTILOS: ' + Object.entries(scores).sort((a,b)=>b[1]-a[1]).map(([k,v]) => k+':'+v).join(' | ')
+      + '\n\nRELATÓRIO:\n' + relatorioTexto;
 
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       to_email: PAULO_EMAIL,
+      name: dadosLider.nome + ' | ' + dadosLider.empresa,
       from_name: 'Crescer 360° - Avaliação de Liderança',
       reply_to: PAULO_EMAIL,
       subject: 'Avaliação de Liderança — ' + dadosLider.nome + ' | ' + dadosLider.empresa,
