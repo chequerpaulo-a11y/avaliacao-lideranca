@@ -1258,7 +1258,10 @@ function extrairSecao(html, id) {
   const doc = parser.parseFromString(html, 'text/html');
   const el = doc.getElementById(id);
   if (el) return el.innerHTML.trim();
-  return '<p style="color:var(--text-muted)">Seção não encontrada.</p>';
+  const regex = new RegExp('<div[^>]+id=["\']' + id + '["\'][^>]*>([\s\S]*?)</div>', 'i');
+  const match = html.match(regex);
+  if (match) return match[1].trim();
+  return '';
 }
 
 async function enviarEmail(relatorio, scores, pillars) {
@@ -1299,11 +1302,10 @@ ${relatorio.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
 
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       to_email: PAULO_EMAIL,
-      subject: `Avaliação de Liderança — ${dadosLider.nome} | ${dadosLider.empresa}`,
-      message: emailBody,
-      lider_nome: dadosLider.nome,
-      lider_empresa: dadosLider.empresa,
-      lider_cargo: dadosLider.cargo
+      from_name: 'Crescer 360° - Avaliação de Liderança',
+      reply_to: PAULO_EMAIL,
+      subject: 'Avaliação de Liderança — ' + dadosLider.nome + ' | ' + dadosLider.empresa,
+      message: emailBody
     });
 
     document.getElementById('email-success').classList.add('show');
