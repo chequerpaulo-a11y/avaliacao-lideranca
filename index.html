@@ -1254,13 +1254,16 @@ function renderRelatorio(textoIA, scores, pillars, estiloPrincipal, estiloSecund
 }
 
 function extrairSecao(html, id) {
-  const match = html.match(new RegExp(`<div id="${id}">([\s\S]*?)<\/div>`));
-  return match ? match[1].trim() : '';
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  const el = doc.getElementById(id);
+  if (el) return el.innerHTML.trim();
+  return '<p style="color:var(--text-muted)">Seção não encontrada.</p>';
 }
 
 async function enviarEmail(relatorio, scores, pillars) {
   try {
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
     const respostasTexto = perguntas.map(p => {
       const r = respostas[p.id];
