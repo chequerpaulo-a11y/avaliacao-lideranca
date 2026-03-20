@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação de Liderança | Crescer 360°</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #C8102E;
+    --red-dark: #9B0D23;
+    --red-light: #FF1F42;
+    --bg: #0A0A0A;
+    --surface: #111111;
+    --surface2: #1A1A1A;
+    --surface3: #222222;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(200,16,46,0.4);
+    --text: #F0EDE8;
+    --text-muted: #888880;
+    --text-dim: #555550;
+    --gold: #C9A84C;
+    --radius: 4px;
+    --radius-lg: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* BACKGROUND TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.012) 80px, rgba(255,255,255,0.012) 81px),
+      repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.012) 80px, rgba(255,255,255,0.012) 81px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 48px 24px 64px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(200,16,46,0.06) 0%, transparent 100%);
+  }
+
+  .logo-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 28px;
+  }
+
+  .logo-tag::before, .logo-tag::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--red);
+  }
+
+  h1 {
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  h1 span {
+    color: var(--red);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .progress-bar-bg {
+    flex: 1;
+    height: 3px;
+    background: var(--surface3);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--red);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .progress-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  /* MAIN */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* SCREEN */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* INTRO SCREEN */
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    margin-bottom: 32px;
+  }
+
+  .intro-card h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .intro-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .intro-card p:last-child { margin-bottom: 0; }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .pillar {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+
+  .pillar-icon {
+    width: 28px;
+    height: 28px;
+    background: rgba(200,16,46,0.12);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .pillar-icon svg { width: 14px; height: 14px; stroke: var(--red); fill: none; }
+
+  .pillar h3 { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--red); margin-bottom: 4px; }
+  .pillar p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* FORM */
+  .form-section {
+    margin-bottom: 8px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label span {
+    background: var(--red);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 2px;
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .field input, .field select {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    transition: border-color 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .field input:focus, .field select:focus {
+    border-color: var(--red);
+  }
+
+  .field select option { background: #1A1A1A; }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .question-card:hover {
+    border-color: rgba(200,16,46,0.2);
+  }
+
+  .question-card.answered {
+    border-color: rgba(200,16,46,0.3);
+  }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .q-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-dim);
+    transition: all 0.2s;
+  }
+
+  .question-card.answered .q-num {
+    background: var(--red);
+    border-color: var(--red);
+    color: white;
+  }
+
+  .q-text {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .q-pillar {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+
+  /* OPTIONS */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.18s;
+    position: relative;
+  }
+
+  .option:hover {
+    border-color: rgba(200,16,46,0.35);
+    background: var(--surface3);
+  }
+
+  .option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .option-dot {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text-dim);
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s;
+  }
+
+  .option-dot::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.18s;
+  }
+
+  .option.selected {
+    border-color: var(--red);
+    background: rgba(200,16,46,0.06);
+  }
+
+  .option.selected .option-dot {
+    background: var(--red);
+    border-color: var(--red);
+  }
+
+  .option.selected .option-dot::after {
+    opacity: 1;
+  }
+
+  .option-text {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .option.selected .option-text {
+    color: var(--text);
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--red-light);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-primary:disabled {
+    background: var(--surface3);
+    color: var(--text-dim);
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+
+  .btn-full { width: 100%; }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  /* LOADING */
+  #screen-loading {
+    text-align: center;
+    padding: 80px 24px;
+  }
+
+  .loader-ring {
+    width: 56px;
+    height: 56px;
+    border: 3px solid var(--surface3);
+    border-top-color: var(--red);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+    margin: 0 auto 32px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loader-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .loader-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* REPORT */
+  #screen-report {
+    animation: fadeUp 0.5s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .report-header {
+    text-align: center;
+    padding: 40px 0 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+
+  .report-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+  }
+
+  .report-name {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .report-style-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--red);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .report-company {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* SCORE VISUAL */
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .score-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .score-card-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--red);
+    letter-spacing: -0.02em;
+    margin-bottom: 2px;
+  }
+
+  .score-card-max {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  .score-bar-wrap {
+    margin-top: 8px;
+    height: 3px;
+    background: var(--surface3);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .score-bar {
+    height: 100%;
+    background: var(--red);
+    border-radius: 99px;
+  }
+
+  /* REPORT SECTIONS */
+  .report-section {
+    margin-bottom: 32px;
+  }
+
+  .report-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .report-section-title::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: var(--red);
+  }
+
+  .report-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  .report-content strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .report-content ul {
+    margin: 12px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .report-content ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .report-content ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 1.5px;
+    background: var(--red);
+  }
+
+  .highlight-box {
+    background: rgba(200,16,46,0.06);
+    border: 1px solid rgba(200,16,46,0.2);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+
+  .highlight-box h3 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .highlight-box p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  .highlight-box strong { color: var(--red); }
+
+  /* SUCCESS MSG */
+  .email-success {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16,200,100,0.08);
+    border: 1px solid rgba(16,200,100,0.2);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4fd89a;
+    margin-top: 16px;
+  }
+
+  .email-success.show { display: flex; }
+
+  /* ERROR */
+  .error-msg {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,16,46,0.08);
+    border: 1px solid rgba(200,16,46,0.2);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--red);
+    margin-top: 16px;
+  }
+
+  .error-msg.show { display: flex; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .score-grid { grid-template-columns: repeat(2, 1fr); }
+    .pillars { grid-template-columns: 1fr; }
+    header { padding: 32px 16px 48px; }
+    .question-card { padding: 20px; }
+    .report-content { padding: 20px; }
+    .btn-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-tag">Crescer 360°</div>
+  <h1>Avaliação de<br><span>Liderança</span></h1>
+  <p class="header-sub">Descubra seu estilo, suas forças e seu principal ponto de desenvolvimento como líder.</p>
+</header>
+
+<div class="progress-bar-wrap" id="progress-wrap" style="display:none;">
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-label" id="progress-label">0 / 20</div>
+</div>
+
+<main>
+
+  <!-- TELA 1: DADOS -->
+  <div class="screen active" id="screen-dados">
+    <div class="intro-card">
+      <h2>Antes de começar</h2>
+      <p>Esta avaliação leva cerca de 5 a 8 minutos. Não há respostas certas ou erradas — o que importa é a sua resposta mais honesta, não a que você acha que deveria dar.</p>
+      <p>Com base nas suas respostas, você receberá um relatório personalizado com seu estilo de liderança, forças, pontos de atenção e seu principal plano de ação.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Estratégia</h3>
+          <p>Visão, direção e capacidade de decidir com clareza</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Cultura</h3>
+          <p>Valores, ambiente e como você influencia o time</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>Liderança</h3>
+          <p>Como você inspira, direciona e desenvolve pessoas</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Performance</h3>
+          <p>Disciplina, execução e entrega de resultados</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="section-label"><span>01</span> Dados de identificação</div>
+      <div class="field">
+        <label>Nome completo</label>
+        <input type="text" id="nome" placeholder="Seu nome" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>Empresa / Organização</label>
+        <input type="text" id="empresa" placeholder="Nome da empresa">
+      </div>
+      <div class="field">
+        <label>Cargo atual</label>
+        <input type="text" id="cargo" placeholder="Seu cargo">
+      </div>
+      <div class="field">
+        <label>Quantas pessoas você lidera diretamente?</label>
+        <select id="equipe">
+          <option value="">Selecione</option>
+          <option value="Nenhuma pessoa diretamente (sou liderado)">Nenhuma (sou liderado)</option>
+          <option value="1 a 3 pessoas">1 a 3 pessoas</option>
+          <option value="4 a 10 pessoas">4 a 10 pessoas</option>
+          <option value="11 a 30 pessoas">11 a 30 pessoas</option>
+          <option value="Mais de 30 pessoas">Mais de 30 pessoas</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Há quantos anos você está em posição de liderança?</label>
+        <select id="experiencia">
+          <option value="">Selecione</option>
+          <option value="Estou começando agora (menos de 1 ano)">Estou começando (menos de 1 ano)</option>
+          <option value="1 a 3 anos">1 a 3 anos</option>
+          <option value="4 a 7 anos">4 a 7 anos</option>
+          <option value="8 a 15 anos">8 a 15 anos</option>
+          <option value="Mais de 15 anos">Mais de 15 anos</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-full" onclick="irParaQuestoes()">
+      Iniciar avaliação →
+    </button>
+  </div>
+
+  <!-- TELA 2: QUESTÕES -->
+  <div class="screen" id="screen-questoes"></div>
+
+  <!-- TELA 3: LOADING -->
+  <div class="screen" id="screen-loading">
+    <div class="loader-ring"></div>
+    <p class="loader-title">Gerando seu relatório...</p>
+    <p class="loader-sub">A inteligência artificial está analisando suas respostas</p>
+  </div>
+
+  <!-- TELA 4: RELATÓRIO -->
+  <div class="screen" id="screen-report"></div>
+
+</main>
+
+<script>
+const EMAILJS_SERVICE_ID = 'service_crescer360';
+const EMAILJS_TEMPLATE_ID = 'template_avaliacao';
+const EMAILJS_PUBLIC_KEY = 'a9-Dxx_YUDCftzJ41';
+const PAULO_EMAIL = 'chequerpaulo@gmail.com';
+
+const perguntas = [
+  { id:1, pillar:'Estratégia', texto:'Quando preciso tomar uma decisão importante, meu comportamento habitual é:', opcoes:[
+    {letra:'A', texto:'Decido rapidamente com base na minha experiência e intuição', estilo:'Executor', peso:{estrategia:2,performance:3}},
+    {letra:'B', texto:'Analiso dados, ouço o time e então decido com clareza', estilo:'Estrategista', peso:{estrategia:3,performance:2}},
+    {letra:'C', texto:'Busco consenso e procuro que todos se sintam ouvidos antes de decidir', estilo:'Integrador', peso:{cultura:3,lideranca:2}},
+    {letra:'D', texto:'Delego a decisão para quem está mais perto do problema', estilo:'Desenvolvedor', peso:{lideranca:3,cultura:2}}
+  ]},
+  { id:2, pillar:'Estratégia', texto:'Em relação à visão de futuro do meu time ou empresa, eu:', opcoes:[
+    {letra:'A', texto:'Tenho uma visão clara e comunico ela com frequência', estilo:'Estrategista', peso:{estrategia:4,lideranca:2}},
+    {letra:'B', texto:'Tenho uma visão mas raramente paro para comunicar', estilo:'Executor', peso:{estrategia:2,performance:2}},
+    {letra:'C', texto:'Construo a visão junto com o time de forma colaborativa', estilo:'Integrador', peso:{cultura:3,lideranca:3}},
+    {letra:'D', texto:'Foco mais no presente e no que precisa ser entregue agora', estilo:'Executor', peso:{performance:4,estrategia:1}}
+  ]},
+  { id:3, pillar:'Estratégia', texto:'Quando percebo que o time está indo na direção errada, eu:', opcoes:[
+    {letra:'A', texto:'Intervenho rapidamente e corrijo o rumo de forma direta', estilo:'Executor', peso:{performance:3,estrategia:2}},
+    {letra:'B', texto:'Faço perguntas para que eles próprios percebam o problema', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:2}},
+    {letra:'C', texto:'Reúno o time, analiso o problema juntos e realinhamos', estilo:'Integrador', peso:{cultura:3,estrategia:2}},
+    {letra:'D', texto:'Monitoro mais de perto e espero o momento certo para intervir', estilo:'Estrategista', peso:{estrategia:3,performance:2}}
+  ]},
+  { id:4, pillar:'Cultura', texto:'Como você descreveria o ambiente que você cria para o seu time?', opcoes:[
+    {letra:'A', texto:'Exigente, focado em resultado e com alto nível de performance', estilo:'Executor', peso:{performance:4,estrategia:1}},
+    {letra:'B', texto:'Seguro, onde as pessoas se sentem à vontade para errar e aprender', estilo:'Integrador', peso:{cultura:4,lideranca:2}},
+    {letra:'C', texto:'Desafiador, onde cada um é estimulado a crescer além do que acredita ser capaz', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:2}},
+    {letra:'D', texto:'Estratégico, focado em clareza de papéis e prioridades', estilo:'Estrategista', peso:{estrategia:3,performance:2}}
+  ]},
+  { id:5, pillar:'Cultura', texto:'Quando alguém do time comete um erro sério, minha reação natural é:', opcoes:[
+    {letra:'A', texto:'Confrontar diretamente, deixar claro o impacto e cobrar solução', estilo:'Executor', peso:{performance:3,estrategia:2}},
+    {letra:'B', texto:'Entender o que aconteceu antes de qualquer julgamento', estilo:'Integrador', peso:{cultura:4,lideranca:2}},
+    {letra:'C', texto:'Usar o erro como oportunidade de aprendizado e desenvolvimento', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:2}},
+    {letra:'D', texto:'Analisar o processo que levou ao erro e corrigi-lo na raiz', estilo:'Estrategista', peso:{estrategia:3,performance:2}}
+  ]},
+  { id:6, pillar:'Cultura', texto:'Em relação a feedbacks, você:', opcoes:[
+    {letra:'A', texto:'Dá feedback frequente, direto e sem rodeios', estilo:'Executor', peso:{performance:3,lideranca:2}},
+    {letra:'B', texto:'Dá feedback com cuidado, pensando em como a pessoa vai receber', estilo:'Integrador', peso:{cultura:4,lideranca:2}},
+    {letra:'C', texto:'Usa o feedback como ferramenta de coaching e desenvolvimento', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:2}},
+    {letra:'D', texto:'Prefere feedbacks estruturados em momentos formais', estilo:'Estrategista', peso:{estrategia:3,performance:1}}
+  ]},
+  { id:7, pillar:'Liderança', texto:'Quando entra uma pessoa nova no time, você tende a:', opcoes:[
+    {letra:'A', texto:'Deixar claro as expectativas e o que precisa ser entregue logo', estilo:'Executor', peso:{performance:3,estrategia:2}},
+    {letra:'B', texto:'Apresentar o time, criar conexão e garantir que se sinta bem-vindo', estilo:'Integrador', peso:{cultura:4,lideranca:2}},
+    {letra:'C', texto:'Acompanhar de perto no início e ir dando mais autonomia gradualmente', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:1}},
+    {letra:'D', texto:'Explicar o contexto estratégico e como o papel dela impacta o todo', estilo:'Estrategista', peso:{estrategia:3,lideranca:2}}
+  ]},
+  { id:8, pillar:'Liderança', texto:'Em relação ao desenvolvimento das pessoas do seu time, você:', opcoes:[
+    {letra:'A', texto:'Foca em quem já performa bem e potencializa ainda mais', estilo:'Executor', peso:{performance:3,estrategia:1}},
+    {letra:'B', texto:'Investe tempo com todos, mas especialmente com quem mais precisa', estilo:'Integrador', peso:{cultura:3,lideranca:3}},
+    {letra:'C', texto:'Tem planos individuais de desenvolvimento para cada pessoa', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:2}},
+    {letra:'D', texto:'Desenvolve pensando em quais competências a empresa precisará no futuro', estilo:'Estrategista', peso:{estrategia:3,lideranca:2}}
+  ]},
+  { id:9, pillar:'Liderança', texto:'Quando preciso motivar o time em um momento difícil, eu:', opcoes:[
+    {letra:'A', texto:'Mostro os resultados que precisamos alcançar e o que está em jogo', estilo:'Executor', peso:{performance:3,estrategia:2}},
+    {letra:'B', texto:'Ouço o time, reconheço o que estão sentindo e me conecto com eles', estilo:'Integrador', peso:{cultura:4,lideranca:2}},
+    {letra:'C', texto:'Inspiro com uma visão de futuro e mostro o propósito por trás do esforço', estilo:'Estrategista', peso:{estrategia:3,lideranca:3}},
+    {letra:'D', texto:'Ajudo cada pessoa individualmente a encontrar sua motivação interna', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:2}}
+  ]},
+  { id:10, pillar:'Liderança', texto:'Qual dessas afirmações mais representa como você vê seu papel como líder?', opcoes:[
+    {letra:'A', texto:'Meu papel é entregar resultados e garantir que o time execute', estilo:'Executor', peso:{performance:4,estrategia:2}},
+    {letra:'B', texto:'Meu papel é criar um ambiente onde as pessoas se sintam bem e deem o melhor', estilo:'Integrador', peso:{cultura:4,lideranca:2}},
+    {letra:'C', texto:'Meu papel é desenvolver líderes e fazer as pessoas crescerem', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:2}},
+    {letra:'D', texto:'Meu papel é definir a direção certa e garantir que o time esteja alinhado', estilo:'Estrategista', peso:{estrategia:4,performance:2}}
+  ]},
+  { id:11, pillar:'Performance', texto:'Em relação ao acompanhamento de metas e resultados, eu:', opcoes:[
+    {letra:'A', texto:'Monitoro de perto, cobro com frequência e não aceito desculpas', estilo:'Executor', peso:{performance:4,estrategia:1}},
+    {letra:'B', texto:'Acompanho os números mas dou autonomia para o time gerenciar', estilo:'Desenvolvedor', peso:{lideranca:3,performance:2}},
+    {letra:'C', texto:'Celebro as conquistas e crio engajamento em torno das metas', estilo:'Integrador', peso:{cultura:3,performance:2}},
+    {letra:'D', texto:'Uso os dados para ajustar a estratégia e reorientar o time quando necessário', estilo:'Estrategista', peso:{estrategia:3,performance:2}}
+  ]},
+  { id:12, pillar:'Performance', texto:'Quando o time não está entregando o que foi combinado, eu:', opcoes:[
+    {letra:'A', texto:'Sou direto, aponto o problema e estabeleço um prazo para correção', estilo:'Executor', peso:{performance:4,estrategia:1}},
+    {letra:'B', texto:'Investigo as causas, removo os obstáculos e reajusto as expectativas', estilo:'Estrategista', peso:{estrategia:3,performance:2}},
+    {letra:'C', texto:'Ouço o time, entendo o que está travando e apoio para desbloquear', estilo:'Integrador', peso:{cultura:3,lideranca:2}},
+    {letra:'D', texto:'Uso como oportunidade de coaching para desenvolver autonomia', estilo:'Desenvolvedor', peso:{lideranca:4,performance:1}}
+  ]},
+  { id:13, pillar:'Performance', texto:'Como você lida com pessoas que entregam abaixo do esperado de forma recorrente?', opcoes:[
+    {letra:'A', texto:'Tenho conversas diretas e, se não mudar, tomo decisões difíceis', estilo:'Executor', peso:{performance:4,estrategia:1}},
+    {letra:'B', texto:'Busco entender se o problema é de capacidade, motivação ou contexto', estilo:'Desenvolvedor', peso:{lideranca:3,cultura:2}},
+    {letra:'C', texto:'Envolvo RH e sigo processos para lidar com isso de forma justa', estilo:'Integrador', peso:{cultura:3,performance:1}},
+    {letra:'D', texto:'Analiso se o papel certo está com a pessoa certa e realoco se necessário', estilo:'Estrategista', peso:{estrategia:3,performance:2}}
+  ]},
+  { id:14, pillar:'Performance', texto:'Em relação à sua própria performance e hábitos de trabalho, você:', opcoes:[
+    {letra:'A', texto:'É altamente disciplinado, tem rotinas sólidas e entrega consistentemente', estilo:'Executor', peso:{performance:4,estrategia:1}},
+    {letra:'B', texto:'Equilibra bem entrega e bem-estar, sem abrir mão de nenhum dos dois', estilo:'Integrador', peso:{cultura:3,performance:2}},
+    {letra:'C', texto:'Foca no que é estratégico e delega o restante com eficiência', estilo:'Estrategista', peso:{estrategia:3,performance:2}},
+    {letra:'D', texto:'Aprende e evolui constantemente, investe tempo em desenvolvimento pessoal', estilo:'Desenvolvedor', peso:{lideranca:3,performance:2}}
+  ]},
+  { id:15, pillar:'Estratégia', texto:'Quando você pensa em prioridades, o que mais representa você?', opcoes:[
+    {letra:'A', texto:'Priorizo o que gera resultado imediato e impacto nos números', estilo:'Executor', peso:{performance:4,estrategia:1}},
+    {letra:'B', texto:'Priorizo o que está alinhado à estratégia de médio e longo prazo', estilo:'Estrategista', peso:{estrategia:4,performance:1}},
+    {letra:'C', texto:'Priorizo o que fortalece o time e o ambiente de trabalho', estilo:'Integrador', peso:{cultura:4,lideranca:1}},
+    {letra:'D', texto:'Priorizo o que desenvolve as pessoas e cria capacidade para o futuro', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:1}}
+  ]},
+  { id:16, pillar:'Cultura', texto:'Como você reage quando alguém desafia uma decisão sua na frente do time?', opcoes:[
+    {letra:'A', texto:'Defendo minha posição com firmeza e deixo claro que a decisão já foi tomada', estilo:'Executor', peso:{performance:3,estrategia:2}},
+    {letra:'B', texto:'Ouço o questionamento com abertura e reconheço se fizer sentido', estilo:'Integrador', peso:{cultura:4,lideranca:2}},
+    {letra:'C', texto:'Transformo em discussão produtiva para o time pensar junto', estilo:'Desenvolvedor', peso:{lideranca:3,cultura:3}},
+    {letra:'D', texto:'Explico o raciocínio por trás da decisão e o contexto estratégico', estilo:'Estrategista', peso:{estrategia:3,lideranca:2}}
+  ]},
+  { id:17, pillar:'Liderança', texto:'O que mais te incomoda em um time que você está liderando?', opcoes:[
+    {letra:'A', texto:'Falta de foco, procrastinação e não entrega do combinado', estilo:'Executor', peso:{performance:4,estrategia:1}},
+    {letra:'B', texto:'Falta de harmonia, conflitos e pessoas desmotivadas', estilo:'Integrador', peso:{cultura:4,lideranca:1}},
+    {letra:'C', texto:'Pessoas acomodadas que não querem crescer ou aprender', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:1}},
+    {letra:'D', texto:'Falta de clareza sobre a direção e perda de tempo com o que não importa', estilo:'Estrategista', peso:{estrategia:4,performance:1}}
+  ]},
+  { id:18, pillar:'Liderança', texto:'Qual é o maior elogio que você poderia receber do seu time?', opcoes:[
+    {letra:'A', texto:'"Você é o líder mais eficiente e focado em resultado que já tive"', estilo:'Executor', peso:{performance:4,estrategia:1}},
+    {letra:'B', texto:'"Você é o líder mais humano e presente que já tive"', estilo:'Integrador', peso:{cultura:4,lideranca:2}},
+    {letra:'C', texto:'"Você me fez crescer mais do que qualquer outro líder"', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:2}},
+    {letra:'D', texto:'"Você sempre soube para onde ir e nos guiou com clareza"', estilo:'Estrategista', peso:{estrategia:4,lideranca:1}}
+  ]},
+  { id:19, pillar:'Performance', texto:'Quando você analisa um problema complexo no trabalho, você:', opcoes:[
+    {letra:'A', texto:'Age rápido, resolve o que está na sua mão e ajusta no caminho', estilo:'Executor', peso:{performance:4,estrategia:1}},
+    {letra:'B', texto:'Envolve o time, ouve diferentes perspectivas e decide em conjunto', estilo:'Integrador', peso:{cultura:3,lideranca:3}},
+    {letra:'C', texto:'Faz perguntas poderosas que levam o time a encontrar a solução', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:1}},
+    {letra:'D', texto:'Analisa o contexto, mapeia as causas e desenha um plano antes de agir', estilo:'Estrategista', peso:{estrategia:4,performance:1}}
+  ]},
+  { id:20, pillar:'Estratégia', texto:'Qual dessas frases mais representa a sua filosofia de liderança?', opcoes:[
+    {letra:'A', texto:'"Líder que não entrega resultado não é líder, é gestor de expectativas"', estilo:'Executor', peso:{performance:4,estrategia:2}},
+    {letra:'B', texto:'"Cuide das pessoas e elas cuidarão dos resultados"', estilo:'Integrador', peso:{cultura:4,lideranca:2}},
+    {letra:'C', texto:'"O maior legado de um líder são os líderes que ele formou"', estilo:'Desenvolvedor', peso:{lideranca:4,cultura:2}},
+    {letra:'D', texto:'"Sem clareza de direção, esforço é só desperdício organizado"', estilo:'Estrategista', peso:{estrategia:4,performance:1}}
+  ]}
+];
+
+let respostas = {};
+let dadosLider = {};
+let relatorioGerado = '';
+
+function irParaQuestoes() {
+  const nome = document.getElementById('nome').value.trim();
+  const empresa = document.getElementById('empresa').value.trim();
+  const cargo = document.getElementById('cargo').value.trim();
+  const equipe = document.getElementById('equipe').value;
+  const experiencia = document.getElementById('experiencia').value;
+
+  if (!nome || !empresa || !cargo || !equipe || !experiencia) {
+    alert('Por favor, preencha todos os campos antes de continuar.');
+    return;
+  }
+
+  dadosLider = { nome, empresa, cargo, equipe, experiencia };
+  renderQuestoes();
+  trocarTela('screen-questoes');
+  document.getElementById('progress-wrap').style.display = 'flex';
+  atualizarProgresso();
+}
+
+function renderQuestoes() {
+  const container = document.getElementById('screen-questoes');
+  let html = '<div class="section-label"><span>02</span> Avaliação de Liderança</div>';
+
+  perguntas.forEach((p, idx) => {
+    html += `
+      <div class="question-card" id="qcard-${p.id}">
+        <div class="q-header">
+          <div class="q-num" id="qnum-${p.id}">${p.id}</div>
+          <div>
+            <div class="q-pillar">${p.pillar}</div>
+            <div class="q-text">${p.texto}</div>
+          </div>
+        </div>
+        <div class="options">
+          ${p.opcoes.map(o => `
+            <label class="option" id="opt-${p.id}-${o.letra}" onclick="selecionar(${p.id}, '${o.letra}', '${o.estilo}', this)">
+              <input type="radio" name="q${p.id}" value="${o.letra}">
+              <div class="option-dot"></div>
+              <div class="option-text">${o.texto}</div>
+            </label>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  html += `
+    <div class="btn-row">
+      <button class="btn btn-primary btn-full" id="btn-gerar" onclick="gerarRelatorio()" disabled>
+        Gerar meu relatório →
+      </button>
+    </div>
+  `;
+
+  container.innerHTML = html;
+}
+
+function selecionar(qId, letra, estilo, labelEl) {
+  document.querySelectorAll(`#qcard-${qId} .option`).forEach(o => o.classList.remove('selected'));
+  labelEl.classList.add('selected');
+  document.getElementById(`qcard-${qId}`).classList.add('answered');
+
+  const pergunta = perguntas.find(p => p.id === qId);
+  const opcao = pergunta.opcoes.find(o => o.letra === letra);
+  respostas[qId] = { letra, estilo, texto: opcao.texto, peso: opcao.peso };
+
+  atualizarProgresso();
+
+  if (Object.keys(respostas).length === perguntas.length) {
+    document.getElementById('btn-gerar').disabled = false;
+  }
+}
+
+function atualizarProgresso() {
+  const total = perguntas.length;
+  const respondidas = Object.keys(respostas).length;
+  const pct = Math.round((respondidas / total) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = respondidas + ' / ' + total;
+}
+
+function calcularEscore() {
+  const scores = { Executor: 0, Estrategista: 0, Integrador: 0, Desenvolvedor: 0 };
+  const pillars = { estrategia: 0, cultura: 0, lideranca: 0, performance: 0 };
+
+  Object.values(respostas).forEach(r => {
+    scores[r.estilo] = (scores[r.estilo] || 0) + 1;
+    Object.entries(r.peso).forEach(([k, v]) => {
+      pillars[k] = (pillars[k] || 0) + v;
+    });
+  });
+
+  const estiloOrdenado = Object.entries(scores).sort((a,b) => b[1]-a[1]);
+  const estiloPrincipal = estiloOrdenado[0][0];
+  const estiloSecundario = estiloOrdenado[1][0];
+
+  return { scores, pillars, estiloPrincipal, estiloSecundario };
+}
+
+async function gerarRelatorio() {
+  const { scores, pillars, estiloPrincipal, estiloSecundario } = calcularEscore();
+  trocarTela('screen-loading');
+  document.getElementById('progress-wrap').style.display = 'none';
+
+  const respostasTexto = perguntas.map(p => {
+    const r = respostas[p.id];
+    return `${p.id}. [${p.pillar}] ${p.texto}\nResposta: ${r.texto} (Estilo: ${r.estilo})`;
+  }).join('\n\n');
+
+  const prompt = `Você é Paulo Chequer, consultor de negócios, mentor e idealizador do Crescer 360°, metodologia com 4 pilares: Estratégia, Cultura, Liderança e Performance Individual.
+
+Analise a avaliação de liderança a seguir e gere um relatório personalizado, direto, provocativo e sem clichês.
+
+DADOS DO LÍDER:
+- Nome: ${dadosLider.nome}
+- Empresa: ${dadosLider.empresa}
+- Cargo: ${dadosLider.cargo}
+- Tamanho da equipe: ${dadosLider.equipe}
+- Experiência em liderança: ${dadosLider.experiencia}
+
+ESCORE POR ESTILO:
+- Executor: ${scores.Executor || 0} respostas
+- Estrategista: ${scores.Estrategista || 0} respostas
+- Integrador: ${scores.Integrador || 0} respostas
+- Desenvolvedor: ${scores.Desenvolvedor || 0} respostas
+
+ESCORE POR PILAR (pontos acumulados):
+- Estratégia: ${pillars.estrategia}
+- Cultura: ${pillars.cultura}
+- Liderança: ${pillars.lideranca}
+- Performance Individual: ${pillars.performance}
+
+RESPOSTAS COMPLETAS:
+${respostasTexto}
+
+Gere um relatório com exatamente as seguintes seções em HTML. Use <strong> para destaques. Use <ul><li> para listas. Seja específico, personalizado e direto:
+
+<div id="estilo-crescer">
+[Nomeie o estilo de liderança principal desta pessoa com um nome próprio do vocabulário Crescer 360°, combinando os dois estilos dominantes. Ex: "O Executor Estratégico", "O Integrador com Visão", "O Desenvolvedor de Alta Performance". Seja criativo e específico para esta pessoa. Escreva 3-4 parágrafos explicando com profundidade o que este estilo significa, como este líder pensa, como toma decisões, como influencia o time. Seja preciso e baseado nas respostas dadas.]
+</div>
+
+<div id="forcas">
+[Liste 4 forças específicas desta pessoa como líder, baseadas nas respostas dadas. Cada item deve ter um nome forte em negrito seguido de uma explicação de 2-3 linhas que mostre como essa força se manifesta no dia a dia de liderança.]
+</div>
+
+<div id="atencao">
+[Liste 3 pontos de atenção reais — não genéricos — baseados nas respostas. Seja honesto e direto. Cada item com nome em negrito e explicação de 2-3 linhas sobre o risco ou custo que esse ponto traz para o time e para os resultados.]
+</div>
+
+<div id="plano-acao">
+[Defina O ÚNICO ponto de ação mais importante para este líder — aquele que, se trabalhado, gera mais impacto no desenvolvimento dele. Explique por que este é o foco. Dê 3 ações concretas e específicas que ele pode começar a fazer já. Seja prático, sem frase motivacional vazia.]
+</div>
+
+Responda APENAS com o HTML das 4 divs acima. Nada mais.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1800,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    const textoIA = data.content.map(b => b.text || '').join('');
+    relatorioGerado = textoIA;
+
+    renderRelatorio(textoIA, scores, pillars, estiloPrincipal, estiloSecundario);
+    trocarTela('screen-report');
+
+    enviarEmail(textoIA, scores, pillars);
+
+  } catch(err) {
+    console.error(err);
+    alert('Erro ao gerar relatório. Tente novamente.');
+    trocarTela('screen-questoes');
+    document.getElementById('progress-wrap').style.display = 'flex';
+  }
+}
+
+function renderRelatorio(textoIA, scores, pillars, estiloPrincipal, estiloSecundario) {
+  const maxPillar = Math.max(...Object.values(pillars));
+  const totalRespostas = 20;
+
+  const nomeEstiloEl = document.createElement('div');
+  nomeEstiloEl.innerHTML = textoIA;
+  const estiloDiv = nomeEstiloEl.querySelector('#estilo-crescer');
+  const firstP = estiloDiv ? estiloDiv.querySelector('p, strong, b') : null;
+  let nomeEstilo = estiloPrincipal + ' ' + estiloSecundario;
+
+  const strongEl = estiloDiv ? estiloDiv.querySelector('strong') : null;
+  if (strongEl) nomeEstilo = strongEl.textContent;
+
+  const html = `
+    <div class="report-header">
+      <div class="report-badge">◆ Relatório Crescer 360°</div>
+      <div class="report-name">${dadosLider.nome}</div>
+      <div class="report-company">${dadosLider.cargo} · ${dadosLider.empresa}</div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-card-label">Estratégia</div>
+        <div class="score-card-num">${pillars.estrategia}</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:${Math.round((pillars.estrategia/maxPillar)*100)}%"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Cultura</div>
+        <div class="score-card-num">${pillars.cultura}</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:${Math.round((pillars.cultura/maxPillar)*100)}%"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Liderança</div>
+        <div class="score-card-num">${pillars.lideranca}</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:${Math.round((pillars.lideranca/maxPillar)*100)}%"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Performance</div>
+        <div class="score-card-num">${pillars.performance}</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:${Math.round((pillars.performance/maxPillar)*100)}%"></div></div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <div class="report-section-title">Seu estilo de liderança</div>
+      <div class="report-content" id="conteudo-estilo">
+        ${extrairSecao(textoIA, 'estilo-crescer')}
+      </div>
+    </div>
+
+    <div class="report-section">
+      <div class="report-section-title">Suas forças como líder</div>
+      <div class="report-content">
+        ${extrairSecao(textoIA, 'forcas')}
+      </div>
+    </div>
+
+    <div class="report-section">
+      <div class="report-section-title">Pontos de atenção</div>
+      <div class="report-content">
+        ${extrairSecao(textoIA, 'atencao')}
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>Seu principal foco de desenvolvimento</h3>
+      <div>${extrairSecao(textoIA, 'plano-acao')}</div>
+    </div>
+
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px;">
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;">Próximo passo</p>
+      <p style="font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom:16px;">Este relatório será entregue ao Paulo Chequer antes da sua sessão de mentoria. Prepare-se para aprofundar os pontos mais relevantes e sair com um plano de ação concreto.</p>
+      <div id="email-success" class="email-success">
+        ✓ Relatório enviado com sucesso para o Paulo
+      </div>
+      <div id="email-error" class="error-msg">
+        ✕ Não foi possível enviar o e-mail automaticamente. Salve esta página como PDF.
+      </div>
+    </div>
+  `;
+
+  document.getElementById('screen-report').innerHTML = html;
+}
+
+function extrairSecao(html, id) {
+  const match = html.match(new RegExp(`<div id="${id}">([\s\S]*?)<\/div>`));
+  return match ? match[1].trim() : '';
+}
+
+async function enviarEmail(relatorio, scores, pillars) {
+  try {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    const respostasTexto = perguntas.map(p => {
+      const r = respostas[p.id];
+      return `${p.id}. [${p.pillar}] ${p.texto}\n→ ${r.texto}`;
+    }).join('\n\n');
+
+    const emailBody = `
+NOVA AVALIAÇÃO DE LIDERANÇA — CRESCER 360°
+==========================================
+
+DADOS DO LÍDER:
+Nome: ${dadosLider.nome}
+Empresa: ${dadosLider.empresa}
+Cargo: ${dadosLider.cargo}
+Equipe: ${dadosLider.equipe}
+Experiência: ${dadosLider.experiencia}
+
+ESCORE POR PILAR:
+Estratégia: ${pillars.estrategia}
+Cultura: ${pillars.cultura}
+Liderança: ${pillars.lideranca}
+Performance: ${pillars.performance}
+
+ESTILO DOMINANTE:
+${Object.entries(scores).sort((a,b)=>b[1]-a[1]).map(([k,v]) => `${k}: ${v} respostas`).join('\n')}
+
+RESPOSTAS:
+${respostasTexto}
+
+RELATÓRIO GERADO PELA IA:
+${relatorio.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}
+    `;
+
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email: PAULO_EMAIL,
+      subject: `Avaliação de Liderança — ${dadosLider.nome} | ${dadosLider.empresa}`,
+      message: emailBody,
+      lider_nome: dadosLider.nome,
+      lider_empresa: dadosLider.empresa,
+      lider_cargo: dadosLider.cargo
+    });
+
+    document.getElementById('email-success').classList.add('show');
+  } catch(err) {
+    console.error('EmailJS error:', err);
+    document.getElementById('email-error').classList.add('show');
+  }
+}
+
+function trocarTela(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
