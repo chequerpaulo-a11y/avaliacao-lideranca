@@ -1155,7 +1155,7 @@ Responda APENAS com o HTML das 4 divs acima. Nada mais.`;
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 1800,
+        max_tokens: 3000,
         messages: [{ role: 'user', content: prompt }]
       })
     });
@@ -1258,6 +1258,12 @@ function renderRelatorio(textoIA, scores, pillars, estiloPrincipal, estiloSecund
         ✕ Não foi possível enviar o e-mail automaticamente. Salve esta página como PDF.
       </div>
     </div>
+
+    <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+      <button class="btn btn-primary" onclick="gerarPDF()" id="btn-pdf">
+        Baixar PDF do relatório
+      </button>
+    </div>
   `;
 
   document.getElementById('screen-report').innerHTML = html;
@@ -1276,7 +1282,7 @@ function extrairSecao(html, id) {
 
 async function enviarEmail(relatorio, scores, pillars) {
   try {
-    const relatorioTexto = relatorio.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().substring(0, 2000);
+    const relatorioTexto = relatorio.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().substring(0, 4000);
     const emailBody = 'CRESCER 360 - AVALIACAO DE LIDERANCA\n\n'
       + 'Nome: ' + dadosLider.nome + '\n'
       + 'Email: ' + (dadosLider.email_cliente || '-') + '\n'
@@ -1322,6 +1328,47 @@ function trocarTela(id) {
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+function gerarPDF() {
+  const btn = document.getElementById('btn-pdf');
+  btn.textContent = 'Preparando PDF...';
+  btn.disabled = true;
+  setTimeout(() => {
+    window.print();
+    btn.textContent = 'Baixar PDF do relatório';
+    btn.disabled = false;
+  }, 300);
+}
 </script>
+
+<style>
+@media print {
+  body { background: white !important; color: #111 !important; }
+  body::before { display: none; }
+  header, .progress-bar-wrap, #screen-dados, #screen-questoes, #screen-loading { display: none !important; }
+  #screen-report { display: block !important; }
+  .report-header { border-bottom: 2px solid #C8102E; padding: 20px 0 30px; }
+  .report-name { color: #111 !important; font-size: 36px !important; }
+  .report-style-title { color: #C8102E !important; }
+  .report-company { color: #555 !important; }
+  .score-card { background: #f5f5f5 !important; border: 1px solid #ddd !important; break-inside: avoid; }
+  .score-card-label { color: #555 !important; }
+  .score-card-num { color: #C8102E !important; }
+  .score-bar-wrap { background: #ddd !important; }
+  .score-bar { background: #C8102E !important; }
+  .report-section-title { color: #555 !important; border-bottom: 1px solid #ddd !important; }
+  .report-section-title::before { background: #C8102E !important; }
+  .report-content { background: #f9f9f9 !important; border: 1px solid #ddd !important; color: #333 !important; }
+  .report-content strong { color: #111 !important; }
+  .report-content ul li::before { background: #C8102E !important; }
+  .highlight-box { background: #fff5f5 !important; border: 1px solid #C8102E !important; break-inside: avoid; }
+  .highlight-box h3 { color: #111 !important; }
+  .highlight-box p, .highlight-box div { color: #333 !important; }
+  #btn-pdf, .email-success, .email-error { display: none !important; }
+  main { padding: 0 !important; }
+  .report-section { break-inside: avoid; }
+  @page { margin: 2cm; size: A4; }
+}
+</style>
 </body>
 </html>
