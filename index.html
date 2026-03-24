@@ -31,7 +31,7 @@ main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding
 .intro-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 32px; }
 .intro-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 16px; }
 .intro-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
-.pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 24px; }
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
 .pillar { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
 .pillar h3 { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
 .pillar p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
@@ -42,13 +42,21 @@ main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding
 .field input, .field select { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 500; color: var(--text); transition: border-color 0.2s; outline: none; -webkit-appearance: none; }
 .field input:focus, .field select:focus { border-color: var(--red); }
 .field select option { background: #1A1A1A; }
+.nivel-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 4px; }
+.nivel-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-lg); padding: 16px; cursor: pointer; transition: all 0.2s; }
+.nivel-card:hover { border-color: rgba(200,16,46,0.4); }
+.nivel-card.selected { border-color: var(--red); background: rgba(200,16,46,0.06); }
+.nivel-card h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; color: var(--text-muted); }
+.nivel-card.selected h4 { color: var(--red); }
+.nivel-card p { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+.nivel-card.selected p { color: var(--text-muted); }
 .question-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 16px; transition: border-color 0.2s; }
 .question-card:hover { border-color: rgba(200,16,46,0.2); }
 .question-card.answered { border-color: rgba(200,16,46,0.3); }
 .q-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
 .q-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--text-dim); transition: all 0.2s; }
 .question-card.answered .q-num { background: var(--red); border-color: var(--red); color: white; }
-.q-dim { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+.q-processo { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
 .q-text { font-size: 15px; font-weight: 600; line-height: 1.5; color: var(--text); letter-spacing: -0.01em; }
 .options { display: flex; flex-direction: column; gap: 8px; }
 .option { display: flex; align-items: flex-start; gap: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; cursor: pointer; transition: all 0.18s; position: relative; }
@@ -77,13 +85,20 @@ main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding
 .report-header { text-align: center; padding: 40px 0 48px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
 .report-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; }
 .report-name { font-size: clamp(28px, 5vw, 44px); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.1; }
-.report-company { font-size: 14px; color: var(--text-muted); }
-.score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 40px; }
+.report-company { font-size: 14px; color: var(--text-muted); margin-bottom: 4px; }
+.score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
 .score-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 16px; text-align: center; }
 .score-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
 .score-card-num { font-size: 28px; font-weight: 900; color: var(--red); letter-spacing: -0.02em; margin-bottom: 2px; }
 .score-bar-wrap { margin-top: 8px; height: 3px; background: var(--surface3); border-radius: 99px; overflow: hidden; }
 .score-bar { height: 100%; background: var(--red); border-radius: 99px; }
+.perfil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px; }
+.perfil-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; text-align: center; }
+.perfil-card.destaque { border-color: var(--red); background: rgba(200,16,46,0.06); }
+.perfil-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+.perfil-card.destaque .perfil-card-label { color: var(--red); }
+.perfil-card-num { font-size: 22px; font-weight: 900; color: var(--text-muted); }
+.perfil-card.destaque .perfil-card-num { color: var(--text); }
 .report-section { margin-bottom: 32px; }
 .report-section-title { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
 .report-section-title::before { content: ''; display: block; width: 16px; height: 2px; background: var(--red); }
@@ -96,16 +111,15 @@ main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding
 .highlight-box h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
 .highlight-box p, .highlight-box div { font-size: 14px; line-height: 1.75; color: var(--text-muted); }
 .highlight-box strong { color: var(--red); }
-.gaps-wrap { display: flex; flex-direction: column; gap: 12px; }
-.gap-card { background: var(--surface2); border-left: 3px solid var(--red); border-radius: var(--radius); padding: 20px 24px; font-size: 14px; line-height: 1.7; color: var(--text-muted); }
-.gap-card strong { color: var(--text); display: block; margin-bottom: 8px; font-size: 13px; letter-spacing: 0.03em; }
+.gap-card { background: var(--surface2); border-left: 3px solid var(--red); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 12px; font-size: 14px; line-height: 1.7; color: var(--text-muted); }
+.gap-card strong { color: var(--text); display: block; margin-bottom: 8px; }
 .email-success { display: none; align-items: center; gap: 8px; background: rgba(16,200,100,0.08); border: 1px solid rgba(16,200,100,0.2); border-radius: var(--radius); padding: 12px 16px; font-size: 13px; font-weight: 600; color: #4fd89a; margin-top: 16px; }
 .email-success.show { display: flex; }
 .error-msg { display: none; align-items: center; gap: 8px; background: rgba(200,16,46,0.08); border: 1px solid rgba(200,16,46,0.2); border-radius: var(--radius); padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--red); margin-top: 16px; }
 .error-msg.show { display: flex; }
 @media (max-width: 600px) {
-  .score-grid { grid-template-columns: repeat(2, 1fr); }
-  .pillars { grid-template-columns: 1fr; }
+  .score-grid, .perfil-grid { grid-template-columns: 1fr; }
+  .pillars, .nivel-cards { grid-template-columns: 1fr; }
   .question-card { padding: 20px; }
   .report-content { padding: 20px; }
   .btn-row { flex-direction: column; }
@@ -116,11 +130,12 @@ main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding
   header, .progress-bar-wrap, #screen-dados, #screen-questoes, #screen-loading { display: none !important; }
   #screen-report { display: block !important; }
   .report-header { border-bottom: 2px solid #C8102E; padding: 20px 0 30px; }
-  .report-name { color: #111 !important; font-size: 36px !important; }
+  .report-name { color: #111 !important; }
   .report-company { color: #555 !important; }
-  .score-card { background: #f5f5f5 !important; border: 1px solid #ddd !important; break-inside: avoid; }
-  .score-card-label { color: #555 !important; }
+  .score-card, .perfil-card { background: #f5f5f5 !important; border: 1px solid #ddd !important; break-inside: avoid; }
+  .score-card-label, .perfil-card-label { color: #555 !important; }
   .score-card-num { color: #C8102E !important; }
+  .perfil-card.destaque { background: #fff0f0 !important; border-color: #C8102E !important; }
   .score-bar-wrap { background: #ddd !important; }
   .score-bar { background: #C8102E !important; }
   .report-section-title { color: #555 !important; border-bottom: 1px solid #ddd !important; }
@@ -133,7 +148,7 @@ main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding
   .highlight-box p, .highlight-box div { color: #333 !important; }
   .gap-card { background: #f9f9f9 !important; break-inside: avoid; }
   .gap-card strong { color: #111 !important; }
-  #btn-pdf, #btn-row-final, .email-success, .error-msg { display: none !important; }
+  #btn-row-final, .email-success, .error-msg { display: none !important; }
   main { padding: 0 !important; }
   .report-section { break-inside: avoid; }
   @page { margin: 2cm; size: A4; }
@@ -144,27 +159,28 @@ main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding
 <header>
   <div class="logo-tag">Crescer 360°</div>
   <h1>Avaliação de<br><span>Liderança</span></h1>
-  <p class="header-sub">Descubra onde você é forte, onde estão seus gaps e qual o próximo passo para liderar com mais impacto.</p>
+  <p class="header-sub">Baseada no framework de Execução de Ram Charan. Descubra como você lidera pessoas, estratégia e operações — e onde está seu maior gap.</p>
 </header>
 
 <div class="progress-bar-wrap" id="progress-wrap" style="display:none;">
   <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill"></div></div>
-  <div class="progress-label" id="progress-label">0 / 20</div>
+  <div class="progress-label" id="progress-label">0 / 21</div>
 </div>
 
 <main>
+  <!-- TELA 1: DADOS -->
   <div class="screen active" id="screen-dados">
     <div class="intro-card">
       <h2>Antes de começar</h2>
-      <p>Esta avaliação leva cerca de 5 a 8 minutos. Não há respostas certas ou erradas — o que importa é a sua resposta mais honesta, não a que você acha que deveria dar.</p>
-      <p>Com base nas suas respostas, você receberá um relatório personalizado com seu estilo de liderança, forças, gaps de conexão entre as dimensões e seu principal plano de ação.</p>
+      <p>Esta avaliação leva cerca de 8 a 10 minutos. Responda com honestidade — não há respostas certas ou erradas. O que importa é o que você realmente faz, não o que acha que deveria fazer.</p>
+      <p>Você receberá um relatório com sua avaliação nos 3 processos de execução, seu perfil de atuação real e o gap entre onde você está e onde deveria estar dado o seu nível.</p>
       <div class="pillars">
-        <div class="pillar"><h3>Estratégia</h3><p>Visão, direção, decisão e prioridades</p></div>
-        <div class="pillar"><h3>Pessoas</h3><p>Cultura, desenvolvimento e liderança de times</p></div>
-        <div class="pillar"><h3>Operação</h3><p>Processos, rotinas e disciplina de entrega</p></div>
-        <div class="pillar"><h3>Performance Pessoal</h3><p>Gestão de tempo, energia e conhecimento</p></div>
+        <div class="pillar"><h3>Pessoas</h3><p>As pessoas certas nos lugares certos — avaliar, desenvolver e substituir quando necessário</p></div>
+        <div class="pillar"><h3>Estratégia</h3><p>Um plano claro, simples e realista que conecta direção com execução diária</p></div>
+        <div class="pillar"><h3>Operações</h3><p>Transformar estratégia em ação com disciplina, metas claras e ritmo de execução</p></div>
       </div>
     </div>
+
     <div class="section-label"><span>01</span> Dados de identificação</div>
     <div class="field"><label>Nome completo</label><input type="text" id="nome" placeholder="Seu nome" autocomplete="off"></div>
     <div class="field"><label>E-mail</label><input type="email" id="email_cliente" placeholder="seu@email.com"></div>
@@ -174,7 +190,7 @@ main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding
     <div class="field"><label>Quantas pessoas você lidera diretamente?</label>
       <select id="equipe">
         <option value="">Selecione</option>
-        <option value="Nenhuma pessoa diretamente">Nenhuma (sou liderado)</option>
+        <option value="Nenhuma pessoa diretamente">Nenhuma (ainda não lidero)</option>
         <option value="1 a 3 pessoas">1 a 3 pessoas</option>
         <option value="4 a 10 pessoas">4 a 10 pessoas</option>
         <option value="11 a 30 pessoas">11 a 30 pessoas</option>
@@ -191,17 +207,39 @@ main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding
         <option value="Mais de 15 anos">Mais de 15 anos</option>
       </select>
     </div>
+
+    <div class="field">
+      <label>Qual é o nível de atuação esperado para o seu cargo?</label>
+      <div class="nivel-cards">
+        <div class="nivel-card" id="nivel-operacional" onclick="selecionarNivel('Operacional')">
+          <h4>Operacional</h4>
+          <p>Executo, supervisiono e garanto o dia a dia da operação</p>
+        </div>
+        <div class="nivel-card" id="nivel-tatico" onclick="selecionarNivel('Tático')">
+          <h4>Tático</h4>
+          <p>Faço a ponte entre a estratégia e a operação, traduzo decisões em planos</p>
+        </div>
+        <div class="nivel-card" id="nivel-estrategico" onclick="selecionarNivel('Estratégico')">
+          <h4>Estratégico</h4>
+          <p>Defino direção, tomo decisões de alto impacto e respondo pelo negócio</p>
+        </div>
+      </div>
+    </div>
+
     <button class="btn btn-primary btn-full" onclick="irParaQuestoes()">Iniciar avaliação →</button>
   </div>
 
+  <!-- TELA 2: QUESTÕES -->
   <div class="screen" id="screen-questoes"></div>
 
+  <!-- TELA 3: LOADING -->
   <div class="screen" id="screen-loading">
     <div class="loader-ring"></div>
     <p class="loader-title">Gerando seu relatório...</p>
     <p class="loader-sub">A inteligência artificial está analisando suas respostas</p>
   </div>
 
+  <!-- TELA 4: RELATÓRIO -->
   <div class="screen" id="screen-report"></div>
 </main>
 
@@ -209,134 +247,151 @@ main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding
 const EMAILJS_SERVICE_ID = 'service_crescer360';
 const EMAILJS_TEMPLATE_ID = 'template_avaliacao';
 const EMAILJS_PUBLIC_KEY = 'a9-Dxx_YUDCftzJ41';
-const PAULO_EMAIL = 'chequerpaulo@gmail.com';
 const WORKER_URL = 'https://crescer360-proxy.chequerpaulo.workers.dev/';
 
-const perguntas = [
-  { id:1, dim:'Estratégia', texto:'Quando defino prioridades para o time, meu critério principal é:', opcoes:[
-    {t:'A', x:'O que gera mais resultado no curto prazo', d:{estrategia:1,operacao:3}},
-    {t:'B', x:'O que está mais alinhado com onde quero chegar em 1 a 3 anos', d:{estrategia:4}},
-    {t:'C', x:'O que resolve o maior problema que o time está enfrentando agora', d:{operacao:2,pessoas:2}},
-    {t:'D', x:'O que desenvolve a capacidade do time para o futuro', d:{pessoas:3,estrategia:1}}
-  ]},
-  { id:2, dim:'Estratégia', texto:'Em relação à visão de futuro da minha área ou empresa, eu:', opcoes:[
-    {t:'A', x:'Tenho uma visão clara e a comunico com frequência para o time', d:{estrategia:4}},
-    {t:'B', x:'Tenho uma visão mas raramente paro para comunicar', d:{estrategia:2}},
-    {t:'C', x:'Construo a visão junto com o time de forma colaborativa', d:{pessoas:3,estrategia:2}},
-    {t:'D', x:'Foco no presente — a visão emerge conforme executamos', d:{operacao:3}}
-  ]},
-  { id:3, dim:'Estratégia', texto:'Quando percebo que a direção que seguimos está errada, eu:', opcoes:[
-    {t:'A', x:'Mudo rapidamente e comunico o novo rumo com clareza', d:{estrategia:4}},
-    {t:'B', x:'Analiso com cuidado antes de mudar para não criar instabilidade', d:{estrategia:2,operacao:2}},
-    {t:'C', x:'Envolvo o time na análise para decidirmos juntos', d:{pessoas:3,estrategia:1}},
-    {t:'D', x:'Ajusto o processo e monitoro se a mudança resolve', d:{operacao:3}}
-  ]},
-  { id:4, dim:'Estratégia', texto:'Como você toma decisões importantes sob pressão?', opcoes:[
-    {t:'A', x:'Decido rapidamente com base na experiência e ajusto depois', d:{estrategia:2,operacao:2}},
-    {t:'B', x:'Reúno dados rápidos, analiso e decido com clareza', d:{estrategia:4}},
-    {t:'C', x:'Ouço quem está mais perto do problema antes de decidir', d:{pessoas:3,estrategia:1}},
-    {t:'D', x:'Sigo o processo definido — ele existe para situações como essa', d:{operacao:4}}
-  ]},
-  { id:5, dim:'Estratégia', texto:'Em relação à concorrência e ao mercado, você:', opcoes:[
-    {t:'A', x:'Monitora ativamente e antecipa movimentos com antecedência', d:{estrategia:4}},
-    {t:'B', x:'Acompanha mas reage quando algo relevante acontece', d:{estrategia:2}},
-    {t:'C', x:'Foca no cliente e deixa o mercado falar por si', d:{pessoas:2,estrategia:1}},
-    {t:'D', x:'Confia na execução — quem executa bem não precisa olhar tanto para fora', d:{operacao:3}}
-  ]},
-  { id:6, dim:'Pessoas', texto:'Quando alguém do time comete um erro sério, sua reação natural é:', opcoes:[
-    {t:'A', x:'Confrontar diretamente e cobrar solução imediata', d:{operacao:3}},
-    {t:'B', x:'Entender o contexto antes de qualquer julgamento', d:{pessoas:4}},
-    {t:'C', x:'Usar o erro como oportunidade de aprendizado e coaching', d:{pessoas:4}},
-    {t:'D', x:'Analisar o processo que levou ao erro e corrigi-lo na raiz', d:{operacao:3,estrategia:1}}
-  ]},
-  { id:7, dim:'Pessoas', texto:'Como você descreveria o ambiente que cria para o time?', opcoes:[
-    {t:'A', x:'Exigente, focado em entrega e alto nível de performance', d:{operacao:2,performance:2}},
-    {t:'B', x:'Seguro, onde as pessoas se sentem à vontade para errar e aprender', d:{pessoas:4}},
-    {t:'C', x:'Desafiador, onde cada um é estimulado a crescer além do que acredita', d:{pessoas:3,estrategia:1}},
-    {t:'D', x:'Estruturado, com papéis claros e processos bem definidos', d:{operacao:3,pessoas:1}}
-  ]},
-  { id:8, dim:'Pessoas', texto:'Em relação ao desenvolvimento das pessoas do seu time, você:', opcoes:[
-    {t:'A', x:'Foca em quem já performa bem e potencializa ainda mais', d:{performance:2,estrategia:1}},
-    {t:'B', x:'Investe tempo com todos, especialmente com quem mais precisa', d:{pessoas:4}},
-    {t:'C', x:'Tem planos individuais de desenvolvimento para cada pessoa', d:{pessoas:4}},
-    {t:'D', x:'Desenvolve pensando nas competências que a empresa precisará no futuro', d:{estrategia:2,pessoas:2}}
-  ]},
-  { id:9, dim:'Pessoas', texto:'Como você lida com conflitos dentro do time?', opcoes:[
-    {t:'A', x:'Intervém rapidamente e resolve de forma direta', d:{operacao:2,pessoas:1}},
-    {t:'B', x:'Facilita o diálogo entre as partes e busca entendimento mútuo', d:{pessoas:4}},
-    {t:'C', x:'Deixa o time resolver — intervenho só se escalar', d:{pessoas:1,performance:1}},
-    {t:'D', x:'Analisa a causa raiz e ajusta processos ou papéis para evitar recorrência', d:{operacao:3,estrategia:1}}
-  ]},
-  { id:10, dim:'Pessoas', texto:'Qual dessas afirmações mais representa sua filosofia de liderança?', opcoes:[
-    {t:'A', x:'Líder que não entrega resultado não é líder', d:{operacao:2,performance:2}},
-    {t:'B', x:'Cuide das pessoas e elas cuidarão dos resultados', d:{pessoas:4}},
-    {t:'C', x:'O maior legado de um líder são os líderes que ele formou', d:{pessoas:4}},
-    {t:'D', x:'Sem clareza de direção, esforço é desperdício organizado', d:{estrategia:4}}
-  ]},
-  { id:11, dim:'Operação', texto:'Em relação ao acompanhamento de metas e resultados, você:', opcoes:[
-    {t:'A', x:'Monitora de perto com reuniões e indicadores frequentes', d:{operacao:4}},
-    {t:'B', x:'Acompanha os números mas dá autonomia para o time gerenciar', d:{pessoas:2,operacao:2}},
-    {t:'C', x:'Usa os dados para ajustar a estratégia quando necessário', d:{estrategia:3,operacao:1}},
-    {t:'D', x:'Celebra as conquistas e mantém o time engajado com as metas', d:{pessoas:3,operacao:1}}
-  ]},
-  { id:12, dim:'Operação', texto:'Quando o time não está entregando o que foi combinado, você:', opcoes:[
-    {t:'A', x:'É direto, aponta o problema e estabelece prazo para correção', d:{operacao:4}},
-    {t:'B', x:'Investiga as causas, remove obstáculos e reajusta expectativas', d:{operacao:2,estrategia:2}},
-    {t:'C', x:'Ouço o time, entendo o que está travando e apoio para desbloquear', d:{pessoas:3,operacao:1}},
-    {t:'D', x:'Uso como oportunidade de coaching para desenvolver autonomia', d:{pessoas:3,performance:1}}
-  ]},
-  { id:13, dim:'Operação', texto:'Como você garante que os processos do time sejam seguidos?', opcoes:[
-    {t:'A', x:'Defino processos claros, treino o time e monitoro a execução', d:{operacao:4}},
-    {t:'B', x:'Confio na maturidade do time — processo bom dispensa supervisão constante', d:{pessoas:2}},
-    {t:'C', x:'Reviso processos regularmente para garantir que ainda fazem sentido', d:{operacao:2,estrategia:2}},
-    {t:'D', x:'Foco mais no resultado do que no processo em si', d:{performance:2,estrategia:1}}
-  ]},
-  { id:14, dim:'Operação', texto:'Como você lida com pessoas que entregam abaixo do esperado de forma recorrente?', opcoes:[
-    {t:'A', x:'Tenho conversas diretas e, se não mudar, tomo decisões difíceis', d:{operacao:4}},
-    {t:'B', x:'Busco entender se é capacidade, motivação ou contexto', d:{pessoas:3,operacao:1}},
-    {t:'C', x:'Analiso se o papel certo está com a pessoa certa e realoco se necessário', d:{estrategia:2,pessoas:2}},
-    {t:'D', x:'Reforço expectativas e crio um plano de melhoria estruturado', d:{operacao:3,pessoas:1}}
-  ]},
-  { id:15, dim:'Operação', texto:'Qual é a sua relação com reuniões e rotinas de gestão?', opcoes:[
-    {t:'A', x:'Tenho uma cadência estruturada de reuniões e não abro mão', d:{operacao:4}},
-    {t:'B', x:'Faço quando necessário — reunião demais atrapalha a execução', d:{performance:2}},
-    {t:'C', x:'Uso reuniões para alinhar estratégia e engajar o time', d:{estrategia:2,pessoas:2}},
-    {t:'D', x:'Prefiro 1:1s frequentes a reuniões de grupo', d:{pessoas:3,operacao:1}}
-  ]},
-  { id:16, dim:'Performance Pessoal', texto:'Como você gerencia seu tempo e energia ao longo da semana?', opcoes:[
-    {t:'A', x:'Tenho uma rotina estruturada com blocos de tempo definidos para cada tipo de atividade', d:{performance:4}},
-    {t:'B', x:'Me adapto conforme as demandas — prefiro flexibilidade a rigidez', d:{performance:1}},
-    {t:'C', x:'Priorizo o que é urgente e importante, o resto fica para depois', d:{performance:2,operacao:1}},
-    {t:'D', x:'Foco no que só eu posso fazer e delego o restante', d:{performance:2,estrategia:2}}
-  ]},
-  { id:17, dim:'Performance Pessoal', texto:'Em relação ao seu próprio desenvolvimento e aprendizado, você:', opcoes:[
-    {t:'A', x:'Reserva tempo fixo na agenda para leitura, cursos e reflexão', d:{performance:4}},
-    {t:'B', x:'Aprende conforme os problemas aparecem — o dia a dia ensina muito', d:{performance:1,operacao:1}},
-    {t:'C', x:'Tem áreas específicas de desenvolvimento que está trabalhando ativamente', d:{performance:3}},
-    {t:'D', x:'Investe mais em desenvolver o time do que a si mesmo', d:{pessoas:3}}
-  ]},
-  { id:18, dim:'Performance Pessoal', texto:'Como você lida com tarefas que consomem energia mas são necessárias?', opcoes:[
-    {t:'A', x:'As faço logo, no início do dia, para não procrastinar', d:{performance:4}},
-    {t:'B', x:'Delego sempre que possível para focar no que energiza', d:{performance:2,estrategia:2}},
-    {t:'C', x:'As faço mas sinto que roubam tempo do que realmente importa', d:{performance:2}},
-    {t:'D', x:'Revejo se realmente precisam ser feitas — elimino antes de delegar', d:{performance:3,estrategia:1}}
-  ]},
-  { id:19, dim:'Performance Pessoal', texto:'Quando você analisa sua própria produtividade, o que mais te sabota?', opcoes:[
-    {t:'A', x:'Dificuldade de dizer não — assumo mais do que consigo entregar', d:{performance:2}},
-    {t:'B', x:'Falta de foco — começo muitas coisas ao mesmo tempo', d:{performance:1}},
-    {t:'C', x:'Excesso de reuniões e interrupções que fragmentam o tempo', d:{performance:2,operacao:1}},
-    {t:'D', x:'Tendência ao perfeccionismo — demoro mais do que deveria em algumas tarefas', d:{performance:2,estrategia:1}}
-  ]},
-  { id:20, dim:'Performance Pessoal', texto:'Como você cuida da sua energia para manter alta performance consistente?', opcoes:[
-    {t:'A', x:'Tenho rituais de recuperação — sono, exercício e desconexão deliberada', d:{performance:4}},
-    {t:'B', x:'Funciono bem sob pressão — me energizo em ambientes de alta demanda', d:{performance:2}},
-    {t:'C', x:'Sei quando estou no limite e ajusto o ritmo quando necessário', d:{performance:3}},
-    {t:'D', x:'Ainda estou desenvolvendo consciência sobre o que drena e o que energiza', d:{performance:1}}
-  ]}
-];
-
+let nivelSelecionado = '';
 let respostas = {};
 let dadosLider = {};
+
+function selecionarNivel(nivel) {
+  nivelSelecionado = nivel;
+  document.querySelectorAll('.nivel-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('nivel-' + nivel.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')).classList.add('selected');
+}
+
+const perguntas = [
+  // PESSOAS (7)
+  { id:1, proc:'Pessoas', perfil:{operacional:1,tatico:2,estrategico:3}, texto:'Quando avalia alguém do seu time, você:', opcoes:[
+    {t:'A', x:'Observa o desempenho no dia a dia e dá feedback na hora', p:{operacional:4}, proc:{pessoas:2}},
+    {t:'B', x:'Faz avaliações periódicas com critérios definidos e conversas estruturadas', p:{tatico:4}, proc:{pessoas:3}},
+    {t:'C', x:'Avalia com base no potencial de crescimento e no alinhamento com o futuro da empresa', p:{estrategico:4}, proc:{pessoas:3}},
+    {t:'D', x:'Ainda não tenho um processo claro de avaliação de pessoas', p:{operacional:1}, proc:{pessoas:1}}
+  ]},
+  { id:2, proc:'Pessoas', texto:'Em relação a desenvolver as pessoas do time, você:', opcoes:[
+    {t:'A', x:'Ensina no dia a dia, corrigindo erros e mostrando como fazer', p:{operacional:4}, proc:{pessoas:2}},
+    {t:'B', x:'Identifica lacunas e cria planos de desenvolvimento individuais', p:{tatico:4}, proc:{pessoas:3}},
+    {t:'C', x:'Desenvolve pensando em quem pode assumir posições maiores no futuro', p:{estrategico:4}, proc:{pessoas:3}},
+    {t:'D', x:'O desenvolvimento fica em segundo plano — foco é na entrega', p:{operacional:2}, proc:{pessoas:1}}
+  ]},
+  { id:3, proc:'Pessoas', texto:'Quando percebe que alguém não está no papel certo, você:', opcoes:[
+    {t:'A', x:'Intensifica o acompanhamento e tenta resolver com mais suporte', p:{operacional:3}, proc:{pessoas:2}},
+    {t:'B', x:'Analisa se é um problema de capacidade, motivação ou encaixe de função', p:{tatico:4}, proc:{pessoas:3}},
+    {t:'C', x:'Age com agilidade — realoca ou substitui antes que o problema contamine o time', p:{estrategico:4}, proc:{pessoas:3}},
+    {t:'D', x:'Prefiro esperar mais antes de tomar qualquer decisão sobre pessoas', p:{operacional:1}, proc:{pessoas:1}}
+  ]},
+  { id:4, proc:'Pessoas', texto:'Como você lida com a decisão de substituir alguém do time?', opcoes:[
+    {t:'A', x:'Evito ao máximo — prefiro investir na pessoa antes de qualquer decisão', p:{operacional:2}, proc:{pessoas:1}},
+    {t:'B', x:'Sigo um processo: conversa direta, prazo, plano de melhoria, depois decido', p:{tatico:4}, proc:{pessoas:3}},
+    {t:'C', x:'Decido com clareza quando vejo que a pessoa não tem o perfil para o que a empresa precisa', p:{estrategico:4}, proc:{pessoas:3}},
+    {t:'D', x:'Já tomei decisões assim mas sem um processo claro', p:{operacional:2}, proc:{pessoas:2}}
+  ]},
+  { id:5, proc:'Pessoas', texto:'Quando contrata alguém, seu critério principal é:', opcoes:[
+    {t:'A', x:'Alguém que resolva o problema imediato que tenho na operação', p:{operacional:4}, proc:{pessoas:2}},
+    {t:'B', x:'Alguém que se encaixe na equipe e tenha potencial de crescer na função', p:{tatico:4}, proc:{pessoas:3}},
+    {t:'C', x:'Alguém que possa crescer além da função atual e assumir mais responsabilidade', p:{estrategico:4}, proc:{pessoas:3}},
+    {t:'D', x:'Ainda não tenho participação no processo de contratação', p:{operacional:1}, proc:{pessoas:1}}
+  ]},
+  { id:6, proc:'Pessoas', texto:'Com que frequência você tem conversas diretas sobre desempenho com seu time?', opcoes:[
+    {t:'A', x:'Quando surge um problema concreto ou na avaliação anual', p:{operacional:2}, proc:{pessoas:1}},
+    {t:'B', x:'Em 1:1s regulares onde acompanho progresso e alinho expectativas', p:{tatico:4}, proc:{pessoas:3}},
+    {t:'C', x:'Tenho visão clara do desempenho de cada um e ajo antes que vire problema', p:{estrategico:4}, proc:{pessoas:3}},
+    {t:'D', x:'Raramente — o time é autônomo e se autogerencia', p:{operacional:1}, proc:{pessoas:1}}
+  ]},
+  { id:7, proc:'Pessoas', texto:'Qual afirmação mais representa sua visão sobre gestão de pessoas?', opcoes:[
+    {t:'A', x:'Time bom é time que entrega — foco em resultado, não em processo', p:{operacional:3}, proc:{pessoas:2}},
+    {t:'B', x:'Preciso ter as pessoas certas nos lugares certos para a estratégia funcionar', p:{tatico:4}, proc:{pessoas:3}},
+    {t:'C', x:'Meu papel principal é formar líderes que possam me substituir e crescer além de mim', p:{estrategico:4}, proc:{pessoas:3}},
+    {t:'D', x:'Pessoas são importantes mas operação é o que me toma mais tempo', p:{operacional:2}, proc:{pessoas:1}}
+  ]},
+
+  // ESTRATÉGIA (7)
+  { id:8, proc:'Estratégia', texto:'Como você define as prioridades do seu time?', opcoes:[
+    {t:'A', x:'Com base no que é mais urgente e no que a operação exige no momento', p:{operacional:4}, proc:{estrategia:1}},
+    {t:'B', x:'Alinhando com as metas da empresa e traduzindo em objetivos para o time', p:{tatico:4}, proc:{estrategia:3}},
+    {t:'C', x:'Defino o que precisa ser verdade para chegarmos onde queremos em 1 a 3 anos', p:{estrategico:4}, proc:{estrategia:4}},
+    {t:'D', x:'As prioridades vêm de cima — meu papel é executar o que foi definido', p:{operacional:3}, proc:{estrategia:1}}
+  ]},
+  { id:9, proc:'Estratégia', texto:'Seu plano estratégico atual:', opcoes:[
+    {t:'A', x:'Não existe formalmente — vou adaptando conforme a demanda', p:{operacional:3}, proc:{estrategia:1}},
+    {t:'B', x:'Existe e está conectado com os objetivos da empresa, com metas por área', p:{tatico:4}, proc:{estrategia:3}},
+    {t:'C', x:'É claro, simples, escrito e revisado com regularidade pelo time de liderança', p:{estrategico:4}, proc:{estrategia:4}},
+    {t:'D', x:'Existe mas está na cabeça — ainda não está formalizado ou comunicado', p:{tatico:2}, proc:{estrategia:2}}
+  ]},
+  { id:10, proc:'Estratégia', texto:'Quando a realidade muda e o plano precisa ser ajustado, você:', opcoes:[
+    {t:'A', x:'Reajo às mudanças conforme aparecem — flexibilidade é minha força', p:{operacional:3}, proc:{estrategia:1}},
+    {t:'B', x:'Analiso o impacto, ajusto o plano e recomunico para o time', p:{tatico:4}, proc:{estrategia:3}},
+    {t:'C', x:'Antecipo cenários e tenho alternativas prontas antes que a mudança aconteça', p:{estrategico:4}, proc:{estrategia:4}},
+    {t:'D', x:'Espero a situação se estabilizar antes de tomar qualquer decisão', p:{operacional:2}, proc:{estrategia:1}}
+  ]},
+  { id:11, proc:'Estratégia', texto:'Como você conecta a estratégia com o que o time faz no dia a dia?', opcoes:[
+    {t:'A', x:'Essa conexão ainda não está clara — cada um executa o que sabe fazer', p:{operacional:2}, proc:{estrategia:1}},
+    {t:'B', x:'Traduzo os objetivos estratégicos em metas e projetos por área', p:{tatico:4}, proc:{estrategia:3}},
+    {t:'C', x:'Todo mundo no time sabe como o que faz conecta com onde a empresa quer chegar', p:{estrategico:4}, proc:{estrategia:4}},
+    {t:'D', x:'Communico a direção mas não tenho certeza se o time realmente entende', p:{tatico:2}, proc:{estrategia:2}}
+  ]},
+  { id:12, proc:'Estratégia', texto:'Com que frequência você revisita e comunica a estratégia para o time?', opcoes:[
+    {t:'A', x:'Raramente — estratégia é definida uma vez por ano e fica assim', p:{operacional:2}, proc:{estrategia:1}},
+    {t:'B', x:'Em reuniões periódicas onde alinhamos progresso e ajustes', p:{tatico:4}, proc:{estrategia:3}},
+    {t:'C', x:'Estratégia é parte da conversa constante — está presente nas decisões do dia a dia', p:{estrategico:4}, proc:{estrategia:4}},
+    {t:'D', x:'Quando sinto que o time está perdendo o fio condutor', p:{tatico:2}, proc:{estrategia:2}}
+  ]},
+  { id:13, proc:'Estratégia', texto:'Quando define uma estratégia, o principal critério é:', opcoes:[
+    {t:'A', x:'O que é possível executar com o time e os recursos que tenho hoje', p:{operacional:4}, proc:{estrategia:2}},
+    {t:'B', x:'O que equilibra ambição e realismo — desafiador mas executável', p:{tatico:4}, proc:{estrategia:3}},
+    {t:'C', x:'O que posiciona a empresa para crescer e vencer no mercado a longo prazo', p:{estrategico:4}, proc:{estrategia:4}},
+    {t:'D', x:'O que o dono ou a diretoria espera — alinho minha área com essa expectativa', p:{operacional:3}, proc:{estrategia:1}}
+  ]},
+  { id:14, proc:'Estratégia', texto:'Qual é sua principal dificuldade com estratégia?', opcoes:[
+    {t:'A', x:'Fazer a estratégia descer para o nível operacional e virar ação real', p:{tatico:3}, proc:{estrategia:2}},
+    {t:'B', x:'Manter o time engajado e focado nos objetivos estratégicos no longo prazo', p:{estrategico:3}, proc:{estrategia:3}},
+    {t:'C', x:'Encontrar tempo para pensar estrategicamente — a operação consome tudo', p:{operacional:4}, proc:{estrategia:1}},
+    {t:'D', x:'Não enxergo dificuldade — estratégia é meu ponto forte', p:{estrategico:4}, proc:{estrategia:4}}
+  ]},
+
+  // OPERAÇÕES (7)
+  { id:15, proc:'Operações', texto:'Como você acompanha se as metas estão sendo atingidas?', opcoes:[
+    {t:'A', x:'Estou no dia a dia — percebo os problemas antes dos números mostrarem', p:{operacional:4}, proc:{operacoes:2}},
+    {t:'B', x:'Tenho indicadores definidos e reuniões periódicas de acompanhamento', p:{tatico:4}, proc:{operacoes:3}},
+    {t:'C', x:'Tenho um painel de gestão claro com indicadores-chave e ritmo de revisão definido', p:{estrategico:4}, proc:{operacoes:4}},
+    {t:'D', x:'Acompanho quando algo vai errado — não tenho um processo estruturado', p:{operacional:2}, proc:{operacoes:1}}
+  ]},
+  { id:16, proc:'Operações', texto:'Qual é sua cadência de reuniões de gestão com o time?', opcoes:[
+    {t:'A', x:'Não tenho reuniões fixas — convoco quando necessário', p:{operacional:2}, proc:{operacoes:1}},
+    {t:'B', x:'Tenho reuniões semanais ou quinzenais com agenda e pauta definidas', p:{tatico:4}, proc:{operacoes:3}},
+    {t:'C', x:'Tenho uma cadência completa: diário rápido, semanal de resultados, mensal estratégica', p:{estrategico:4}, proc:{operacoes:4}},
+    {t:'D', x:'Faço reuniões mas sem estrutura definida — são mais conversas', p:{operacional:2}, proc:{operacoes:2}}
+  ]},
+  { id:17, proc:'Operações', texto:'Quando a operação trava — algo não sai como planejado — você:', opcoes:[
+    {t:'A', x:'Coloco a mão na massa e resolve diretamente', p:{operacional:4}, proc:{operacoes:2}},
+    {t:'B', x:'Diagnostico a causa, mobilizo o time e reestabeleço o plano', p:{tatico:4}, proc:{operacoes:3}},
+    {t:'C', x:'Identifico se é um problema pontual ou sistêmico e age na causa raiz', p:{estrategico:4}, proc:{operacoes:4}},
+    {t:'D', x:'Espero o time resolver — só intervenho se escalar muito', p:{operacional:1}, proc:{operacoes:1}}
+  ]},
+  { id:18, proc:'Operações', texto:'Como você garante disciplina de execução no time?', opcoes:[
+    {t:'A', x:'Pela minha presença e acompanhamento próximo do dia a dia', p:{operacional:4}, proc:{operacoes:2}},
+    {t:'B', x:'Com processos, metas claras e cobrança estruturada em reuniões de resultado', p:{tatico:4}, proc:{operacoes:3}},
+    {t:'C', x:'Criando cultura de execução — o time cobra a si mesmo porque entende o propósito', p:{estrategico:4}, proc:{operacoes:4}},
+    {t:'D', x:'Ainda é um desafio — a disciplina de execução não está consolidada', p:{operacional:2}, proc:{operacoes:1}}
+  ]},
+  { id:19, proc:'Operações', texto:'Quando as metas não são atingidas, sua primeira ação é:', opcoes:[
+    {t:'A', x:'Identificar quem não entregou e ter uma conversa direta', p:{operacional:3}, proc:{operacoes:2}},
+    {t:'B', x:'Analisar o que travou, se foi execução, recurso ou planejamento e ajustar', p:{tatico:4}, proc:{operacoes:3}},
+    {t:'C', x:'Revisar se as metas ainda fazem sentido dado o cenário atual', p:{estrategico:4}, proc:{operacoes:3}},
+    {t:'D', x:'Intensificar o acompanhamento para garantir que no próximo ciclo seja diferente', p:{operacional:3}, proc:{operacoes:2}}
+  ]},
+  { id:20, proc:'Operações', texto:'Com relação a processos na sua área, você:', opcoes:[
+    {t:'A', x:'Os processos existem mas estão na cabeça das pessoas, não documentados', p:{operacional:3}, proc:{operacoes:2}},
+    {t:'B', x:'Tenho processos documentados e revisados periodicamente', p:{tatico:4}, proc:{operacoes:3}},
+    {t:'C', x:'Os processos são parte da cultura — o time os segue e os melhora continuamente', p:{estrategico:4}, proc:{operacoes:4}},
+    {t:'D', x:'Ainda não priorizei documentar processos — foco é na entrega', p:{operacional:2}, proc:{operacoes:1}}
+  ]},
+  { id:21, proc:'Operações', texto:'Qual é seu maior desafio na operação hoje?', opcoes:[
+    {t:'A', x:'Garantir consistência — o time entrega bem às vezes, mal outras', p:{operacional:3}, proc:{operacoes:2}},
+    {t:'B', x:'Escalar a operação sem perder qualidade e ritmo', p:{tatico:4}, proc:{operacoes:3}},
+    {t:'C', x:'Fazer a operação rodar sem depender tanto de mim', p:{estrategico:4}, proc:{operacoes:4}},
+    {t:'D', x:'A operação roda bem — meu desafio está em outra área', p:{estrategico:3}, proc:{operacoes:3}}
+  ]}
+];
 
 function irParaQuestoes() {
   const nome = document.getElementById('nome').value.trim();
@@ -346,11 +401,11 @@ function irParaQuestoes() {
   const cargo = document.getElementById('cargo').value.trim();
   const equipe = document.getElementById('equipe').value;
   const experiencia = document.getElementById('experiencia').value;
-  if (!nome || !empresa || !cargo || !equipe || !experiencia) {
-    alert('Por favor, preencha todos os campos antes de continuar.');
+  if (!nome || !empresa || !cargo || !equipe || !experiencia || !nivelSelecionado) {
+    alert('Por favor, preencha todos os campos e selecione o nível de atuação esperado.');
     return;
   }
-  dadosLider = { nome, email_cliente, telefone, empresa, cargo, equipe, experiencia };
+  dadosLider = { nome, email_cliente, telefone, empresa, cargo, equipe, experiencia, nivel: nivelSelecionado };
   renderQuestoes();
   trocarTela('screen-questoes');
   document.getElementById('progress-wrap').style.display = 'flex';
@@ -360,9 +415,9 @@ function irParaQuestoes() {
 function renderQuestoes() {
   const container = document.getElementById('screen-questoes');
   let html = '<div class="section-label"><span>02</span> Avaliação de Liderança</div>';
-  perguntas.forEach(p => {
-    html += '<div class="question-card" id="qcard-' + p.id + '"><div class="q-header"><div class="q-num" id="qnum-' + p.id + '">' + p.id + '</div><div><div class="q-dim">' + p.dim + '</div><div class="q-text">' + p.texto + '</div></div></div><div class="options">';
-    p.opcoes.forEach(o => {
+  perguntas.forEach(function(p) {
+    html += '<div class="question-card" id="qcard-' + p.id + '"><div class="q-header"><div class="q-num" id="qnum-' + p.id + '">' + p.id + '</div><div><div class="q-processo">' + p.proc + '</div><div class="q-text">' + p.texto + '</div></div></div><div class="options">';
+    p.opcoes.forEach(function(o) {
       html += '<label class="option" id="opt-' + p.id + '-' + o.t + '" onclick="selecionar(' + p.id + ', \'' + o.t + '\', this)"><input type="radio" name="q' + p.id + '" value="' + o.t + '"><div class="option-dot"></div><div class="option-text">' + o.x + '</div></label>';
     });
     html += '</div></div>';
@@ -372,12 +427,12 @@ function renderQuestoes() {
 }
 
 function selecionar(qId, letra, labelEl) {
-  document.querySelectorAll('#qcard-' + qId + ' .option').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('#qcard-' + qId + ' .option').forEach(function(o) { o.classList.remove('selected'); });
   labelEl.classList.add('selected');
   document.getElementById('qcard-' + qId).classList.add('answered');
-  const pergunta = perguntas.find(p => p.id === qId);
-  const opcao = pergunta.opcoes.find(o => o.t === letra);
-  respostas[qId] = { letra, texto: opcao.x, dim: pergunta.dim, peso: opcao.d };
+  const pergunta = perguntas.find(function(p) { return p.id === qId; });
+  const opcao = pergunta.opcoes.find(function(o) { return o.t === letra; });
+  respostas[qId] = { letra: letra, texto: opcao.x, proc: pergunta.proc, p: opcao.p, procScore: opcao.proc };
   atualizarProgresso();
   if (Object.keys(respostas).length === perguntas.length) {
     document.getElementById('btn-gerar').disabled = false;
@@ -391,24 +446,33 @@ function atualizarProgresso() {
 }
 
 function calcularEscore() {
-  const dims = { estrategia: 0, pessoas: 0, operacao: 0, performance: 0 };
-  Object.values(respostas).forEach(r => {
-    Object.entries(r.peso).forEach(function(entry) { dims[entry[0]] = (dims[entry[0]] || 0) + entry[1]; });
+  const proc = { pessoas: 0, estrategia: 0, operacoes: 0 };
+  const perfil = { operacional: 0, tatico: 0, estrategico: 0 };
+  Object.values(respostas).forEach(function(r) {
+    if (r.procScore) {
+      Object.entries(r.procScore).forEach(function(e) { proc[e[0]] = (proc[e[0]] || 0) + e[1]; });
+    }
+    if (r.p) {
+      Object.entries(r.p).forEach(function(e) { perfil[e[0]] = (perfil[e[0]] || 0) + e[1]; });
+    }
   });
-  return dims;
+  return { proc: proc, perfil: perfil };
 }
 
 async function gerarRelatorio() {
-  const dims = calcularEscore();
+  const scores = calcularEscore();
   trocarTela('screen-loading');
   document.getElementById('progress-wrap').style.display = 'none';
 
-  const respostasTexto = perguntas.map(p => {
+  const respostasTexto = perguntas.map(function(p) {
     const r = respostas[p.id];
-    return p.id + '. [' + p.dim + '] ' + p.texto + '\nResposta: ' + r.texto;
+    return p.id + '. [' + p.proc + '] ' + p.texto + '\nResposta: ' + r.texto;
   }).join('\n\n');
 
-  const prompt = 'Você é Paulo Chequer, consultor de negócios, mentor e idealizador do Crescer 360°. Sua metodologia avalia líderes em 4 dimensões: Estratégia, Pessoas, Operação e Performance Pessoal — com forte influência do livro Execução (Ram Charan) e do conceito de gestão de tempo, energia e conhecimento.\n\nDADOS DO LÍDER:\n- Nome: ' + dadosLider.nome + '\n- Empresa: ' + dadosLider.empresa + '\n- Cargo: ' + dadosLider.cargo + '\n- Equipe: ' + dadosLider.equipe + '\n- Experiência: ' + dadosLider.experiencia + '\n\nESCORE POR DIMENSÃO:\n- Estratégia: ' + dims.estrategia + '\n- Pessoas: ' + dims.pessoas + '\n- Operação: ' + dims.operacao + '\n- Performance Pessoal: ' + dims.performance + '\n\nRESPOSTAS:\n' + respostasTexto + '\n\nGere um relatório personalizado, direto e sem clichês. Use <strong> para destaques e <ul><li> para listas. Responda APENAS com o HTML das 5 divs abaixo:\n\n<div id="estilo-crescer">\n[Crie um nome próprio para o estilo de liderança desta pessoa no vocabulário Crescer 360° — combine as duas dimensões mais fortes. Escreva 3 parágrafos explicando como esse líder pensa, decide e influencia o time. Seja preciso e baseado nas respostas.]\n</div>\n\n<div id="forcas">\n[Liste 4 forças específicas com nome em negrito e 2 linhas de explicação cada. Baseie-se nas respostas — não seja genérico.]\n</div>\n\n<div id="atencao">\n[Liste 3 pontos de atenção reais com nome em negrito e explicação do risco concreto que esse ponto traz.]\n</div>\n\n<div id="gaps">\n[Identifique os 2 principais gaps de conexão entre as dimensões. Para cada gap escreva: <strong>Gap: Dimensão A → Dimensão B</strong> seguido de 3-4 linhas explicando o que acontece na prática quando esse gap existe e o custo concreto no time e nos resultados.]\n</div>\n\n<div id="plano-acao">\n[Defina O ÚNICO ponto de ação mais importante — aquele que gera mais impacto. Explique por que esse é o foco. Dê 3 ações concretas que ele pode começar já. Sem frases motivacionais vazias.]\n</div>';
+  const perfilReal = Object.entries(scores.perfil).sort(function(a,b){ return b[1]-a[1]; })[0][0];
+  const perfilPt = { operacional: 'Operacional', tatico: 'Tático', estrategico: 'Estratégico' };
+
+  const prompt = 'Você é Paulo Chequer, consultor de negócios e mentor de liderança, idealizador do Crescer 360°. Você usa o framework de Execução de Ram Charan como base analítica.\n\nDADOS DO LÍDER:\n- Nome: ' + dadosLider.nome + '\n- Empresa: ' + dadosLider.empresa + '\n- Cargo: ' + dadosLider.cargo + '\n- Equipe: ' + dadosLider.equipe + '\n- Experiência em liderança: ' + dadosLider.experiencia + '\n- Nível esperado para o cargo: ' + dadosLider.nivel + '\n\nESCORE NOS 3 PROCESSOS DE EXECUÇÃO (Ram Charan):\n- Pessoas: ' + scores.proc.pessoas + ' pontos\n- Estratégia: ' + scores.proc.estrategia + ' pontos\n- Operações: ' + scores.proc.operacoes + ' pontos\n\nPERFIL DE ATUAÇÃO REAL (onde o líder realmente opera):\n- Operacional: ' + scores.perfil.operacional + ' pontos\n- Tático: ' + scores.perfil.tatico + ' pontos\n- Estratégico: ' + scores.perfil.estrategico + ' pontos\n- Perfil dominante real: ' + perfilPt[perfilReal] + '\n\nRESPOSTAS COMPLETAS:\n' + respostasTexto + '\n\nAnálise que você precisa fazer:\n1. O líder declarou que deveria atuar no nível ' + dadosLider.nivel + ', mas seu comportamento nas respostas indica um perfil ' + perfilPt[perfilReal] + '. Analise se há gap entre o nível esperado e o nível real — e o custo concreto desse gap.\n2. Avalie como ele se sai nos 3 processos de Ram Charan: Pessoas (colocar as pessoas certas, avaliar e desenvolver), Estratégia (plano claro, simples e realista conectado à execução), Operações (transformar estratégia em ação com disciplina e ritmo).\n\nGere o relatório em HTML com EXATAMENTE estas 5 divs. Use <strong> para destaques. Use <ul><li> para listas. Seja direto, específico e baseado nas respostas — sem clichês:\n\n<div id="perfil-real">\n[Dê um nome para o perfil de liderança desta pessoa no vocabulário Crescer 360°. Exemplo: "O Executor que Precisa Subir de Nível" ou "O Estrategista Desconectado da Operação". Escreva 3 parágrafos explicando: (1) onde esse líder realmente opera e por quê, (2) como isso se manifesta no dia a dia com o time, (3) o gap entre onde está e onde deveria estar — e o custo real disso.]\n</div>\n\n<div id="processos">\n[Avalie os 3 processos. Para cada um escreva: nome em negrito, nota qualitativa (Forte / Em desenvolvimento / Gap crítico) e 2-3 linhas de análise específica baseada nas respostas. Seja honesto — se há um gap crítico, diga claramente.]\n</div>\n\n<div id="forcas">\n[Liste 3 forças reais desta pessoa como líder executora. Nome em negrito + 2 linhas de explicação específica. Baseie-se nas respostas — não seja genérico.]\n</div>\n\n<div id="atencao">\n[Liste 3 pontos de atenção reais com nome em negrito e explicação do custo concreto que esse ponto traz para a execução, o time e os resultados.]\n</div>\n\n<div id="plano-acao">\n[Defina O ÚNICO ponto de ação mais importante para este líder — aquele que resolve o gap mais crítico. Explique por que este é o foco. Dê 3 ações concretas e específicas que ele pode começar já na próxima semana. Sem frases motivacionais.]\n</div>';
 
   try {
     const response = await fetch(WORKER_URL, {
@@ -417,12 +481,12 @@ async function gerarRelatorio() {
       body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 3000, messages: [{ role: 'user', content: prompt }] })
     });
     const data = await response.json();
-    console.log('API response:', JSON.stringify(data).substring(0, 200));
+    console.log('API:', JSON.stringify(data).substring(0, 200));
     if (!data.content) throw new Error(JSON.stringify(data));
     const textoIA = data.content.map(function(b) { return b.text || ''; }).join('');
-    renderRelatorio(textoIA, dims);
+    renderRelatorio(textoIA, scores);
     trocarTela('screen-report');
-    enviarEmail(textoIA, dims);
+    enviarEmail(textoIA, scores);
   } catch(err) {
     console.error('Erro:', err);
     alert('Erro ao gerar relatório. Tente novamente.');
@@ -439,29 +503,43 @@ function extrairSecao(html, id) {
   return '';
 }
 
-function renderRelatorio(textoIA, dims) {
-  const maxDim = Math.max(dims.estrategia, dims.pessoas, dims.operacao, dims.performance);
-  const gapsHtml = extrairSecao(textoIA, 'gaps');
+function renderRelatorio(textoIA, scores) {
+  const maxProc = Math.max(scores.proc.pessoas, scores.proc.estrategia, scores.proc.operacoes);
+  const maxPerf = Math.max(scores.perfil.operacional, scores.perfil.tatico, scores.perfil.estrategico);
+  const perfilPt = { operacional: 'Operacional', tatico: 'Tático', estrategico: 'Estratégico' };
+  const perfilReal = Object.entries(scores.perfil).sort(function(a,b){ return b[1]-a[1]; })[0][0];
 
-  const html = '<div class="report-header"><div class="report-badge">◆ Relatório Crescer 360°</div><div class="report-name">' + dadosLider.nome + '</div><div class="report-company">' + dadosLider.cargo + ' · ' + dadosLider.empresa + '</div></div>'
+  function destaque(val, max) { return val === max ? ' destaque' : ''; }
+
+  const html = '<div class="report-header"><div class="report-badge">◆ Relatório Crescer 360°</div><div class="report-name">' + dadosLider.nome + '</div><div class="report-company">' + dadosLider.cargo + ' · ' + dadosLider.empresa + '</div><div class="report-company" style="margin-top:6px; font-size:12px;">Nível esperado: <strong style="color:var(--text)">' + dadosLider.nivel + '</strong> · Perfil real: <strong style="color:var(--red)">' + perfilPt[perfilReal] + '</strong></div></div>'
+
+    + '<p style="font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-bottom:12px;">Processos de Execução</p>'
     + '<div class="score-grid">'
-    + '<div class="score-card"><div class="score-card-label">Estratégia</div><div class="score-card-num">' + dims.estrategia + '</div><div class="score-bar-wrap"><div class="score-bar" style="width:' + Math.round((dims.estrategia/maxDim)*100) + '%"></div></div></div>'
-    + '<div class="score-card"><div class="score-card-label">Pessoas</div><div class="score-card-num">' + dims.pessoas + '</div><div class="score-bar-wrap"><div class="score-bar" style="width:' + Math.round((dims.pessoas/maxDim)*100) + '%"></div></div></div>'
-    + '<div class="score-card"><div class="score-card-label">Operação</div><div class="score-card-num">' + dims.operacao + '</div><div class="score-bar-wrap"><div class="score-bar" style="width:' + Math.round((dims.operacao/maxDim)*100) + '%"></div></div></div>'
-    + '<div class="score-card"><div class="score-card-label">Performance</div><div class="score-card-num">' + dims.performance + '</div><div class="score-bar-wrap"><div class="score-bar" style="width:' + Math.round((dims.performance/maxDim)*100) + '%"></div></div></div>'
+    + '<div class="score-card"><div class="score-card-label">Pessoas</div><div class="score-card-num">' + scores.proc.pessoas + '</div><div class="score-bar-wrap"><div class="score-bar" style="width:' + Math.round((scores.proc.pessoas/maxProc)*100) + '%"></div></div></div>'
+    + '<div class="score-card"><div class="score-card-label">Estratégia</div><div class="score-card-num">' + scores.proc.estrategia + '</div><div class="score-bar-wrap"><div class="score-bar" style="width:' + Math.round((scores.proc.estrategia/maxProc)*100) + '%"></div></div></div>'
+    + '<div class="score-card"><div class="score-card-label">Operações</div><div class="score-card-num">' + scores.proc.operacoes + '</div><div class="score-bar-wrap"><div class="score-bar" style="width:' + Math.round((scores.proc.operacoes/maxProc)*100) + '%"></div></div></div>'
     + '</div>'
-    + '<div class="report-section"><div class="report-section-title">Seu estilo de liderança</div><div class="report-content">' + extrairSecao(textoIA, 'estilo-crescer') + '</div></div>'
-    + '<div class="report-section"><div class="report-section-title">Suas forças como líder</div><div class="report-content">' + extrairSecao(textoIA, 'forcas') + '</div></div>'
+
+    + '<p style="font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-bottom:12px;">Perfil de Atuação Real</p>'
+    + '<div class="perfil-grid" style="margin-bottom:40px;">'
+    + '<div class="perfil-card' + destaque(scores.perfil.operacional, maxPerf) + '"><div class="perfil-card-label">Operacional</div><div class="perfil-card-num">' + scores.perfil.operacional + '</div></div>'
+    + '<div class="perfil-card' + destaque(scores.perfil.tatico, maxPerf) + '"><div class="perfil-card-label">Tático</div><div class="perfil-card-num">' + scores.perfil.tatico + '</div></div>'
+    + '<div class="perfil-card' + destaque(scores.perfil.estrategico, maxPerf) + '"><div class="perfil-card-label">Estratégico</div><div class="perfil-card-num">' + scores.perfil.estrategico + '</div></div>'
+    + '</div>'
+
+    + '<div class="report-section"><div class="report-section-title">Seu perfil de liderança executora</div><div class="report-content">' + extrairSecao(textoIA, 'perfil-real') + '</div></div>'
+    + '<div class="report-section"><div class="report-section-title">Avaliação nos 3 processos de execução</div><div class="report-content">' + extrairSecao(textoIA, 'processos') + '</div></div>'
+    + '<div class="report-section"><div class="report-section-title">Suas forças como líder executor</div><div class="report-content">' + extrairSecao(textoIA, 'forcas') + '</div></div>'
     + '<div class="report-section"><div class="report-section-title">Pontos de atenção</div><div class="report-content">' + extrairSecao(textoIA, 'atencao') + '</div></div>'
-    + '<div class="report-section"><div class="report-section-title">Gaps de conexão entre dimensões</div><div class="gaps-wrap">' + gapsHtml + '</div></div>'
     + '<div class="highlight-box"><h3>Seu principal foco de desenvolvimento</h3><div>' + extrairSecao(textoIA, 'plano-acao') + '</div></div>'
+
     + '<div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 28px; margin-bottom: 24px;"><p style="font-size:13px; color:var(--text-muted); margin-bottom:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;">Próximo passo</p><p style="font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom:16px;">Este relatório será entregue ao Paulo Chequer antes da sua sessão de mentoria. Prepare-se para aprofundar os pontos mais relevantes e sair com um plano de ação concreto.</p><div id="email-success" class="email-success">✓ Relatório enviado com sucesso para o Paulo</div><div id="email-error" class="error-msg">✕ Não foi possível enviar o e-mail automaticamente.</div></div>'
-    + '<div id="btn-row-final" style="display: flex; gap: 12px; flex-wrap: wrap;"><button class="btn btn-primary" id="btn-pdf" onclick="gerarPDF()">Baixar PDF do relatório</button></div>';
+    + '<div id="btn-row-final" style="display:flex; gap:12px; flex-wrap:wrap;"><button class="btn btn-primary" id="btn-pdf" onclick="gerarPDF()">Baixar PDF do relatório</button></div>';
 
   document.getElementById('screen-report').innerHTML = html;
 }
 
-async function enviarEmail(relatorio, dims) {
+async function enviarEmail(relatorio, scores) {
   try {
     const relatorioTexto = relatorio.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().substring(0, 3500);
     const emailBody = 'CRESCER 360 - AVALIACAO DE LIDERANCA\n\n'
@@ -471,8 +549,10 @@ async function enviarEmail(relatorio, dims) {
       + 'Empresa: ' + dadosLider.empresa + '\n'
       + 'Cargo: ' + dadosLider.cargo + '\n'
       + 'Equipe: ' + dadosLider.equipe + '\n'
-      + 'Experiencia: ' + dadosLider.experiencia + '\n\n'
-      + 'DIMENSOES: Estrategia=' + dims.estrategia + ' | Pessoas=' + dims.pessoas + ' | Operacao=' + dims.operacao + ' | Performance=' + dims.performance + '\n\n'
+      + 'Experiencia: ' + dadosLider.experiencia + '\n'
+      + 'Nivel esperado: ' + dadosLider.nivel + '\n\n'
+      + 'PROCESSOS: Pessoas=' + scores.proc.pessoas + ' | Estrategia=' + scores.proc.estrategia + ' | Operacoes=' + scores.proc.operacoes + '\n'
+      + 'PERFIL: Operacional=' + scores.perfil.operacional + ' | Tatico=' + scores.perfil.tatico + ' | Estrategico=' + scores.perfil.estrategico + '\n\n'
       + 'RELATORIO:\n' + relatorioTexto;
 
     const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
@@ -511,7 +591,7 @@ function gerarPDF() {
 }
 
 function trocarTela(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
